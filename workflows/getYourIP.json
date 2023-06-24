@@ -1,0 +1,77 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-10-20T17:31:48.570Z",
+  "id": "1",
+  "name": "getYourIP",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "304e10ea-1d63-475e-a19a-49d850675218",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "path": "get_ip",
+        "options": {}
+      },
+      "id": "716a30ee-92e7-40ee-b2ac-c5cba64eb73f",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        300
+      ],
+      "webhookId": "492af7dc-98ad-483c-9287-b2d6bb07c193"
+    },
+    {
+      "parameters": {
+        "fromEmail": "Webhook (flow.sant.sh) <flow@sant.sh>",
+        "toEmail": "cisco-windows@sant.sh",
+        "subject": "Cisco Windows IP",
+        "html": "=Current IP - {{$json[\"headers\"][\"x-forwarded-for\"]}}",
+        "options": {}
+      },
+      "id": "bf1b29bb-d8c5-431d-97ba-0112fd5a5d8d",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        120,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "1",
+          "name": "SendGrid"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-04-02T17:02:38.509Z",
+  "versionId": "29323dbf-2e62-49af-beb8-05502e163c1f"
+}
