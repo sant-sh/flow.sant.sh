@@ -1,0 +1,665 @@
+{
+  "active": true,
+  "connections": {
+    "PNR Number": {
+      "main": [
+        [
+          {
+            "node": "Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Payload": {
+      "main": [
+        [
+          {
+            "node": "Get PNR Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get PNR Status": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Binary Files": {
+      "main": [
+        [
+          {
+            "node": "readData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command": {
+      "main": [
+        [
+          {
+            "node": "fileCheck",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "dummyData": {
+      "main": [
+        [
+          {
+            "node": "DataConversion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "writeDummyData": {
+      "main": [
+        [
+          {
+            "node": "PNR Number",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DataConversion": {
+      "main": [
+        [
+          {
+            "node": "writeDummyData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "readData": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "IF3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF3": {
+      "main": [
+        [
+          {
+            "node": "Notify Signal",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move Binary Data": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "fileCheck": {
+      "main": [
+        [
+          {
+            "node": "PNR Number",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "dummyData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Binary File": {
+      "main": [
+        [
+          {
+            "node": "Halt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Signal": {
+      "main": [
+        [
+          {
+            "node": "Halt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Move Binary Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-06-21T08:00:39.716Z",
+  "id": "7",
+  "name": "PNR Status (Prod)",
+  "nodes": [
+    {
+      "parameters": {
+        "values": {
+          "number": [
+            {
+              "name": "PNR",
+              "value": 6521287895
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "id": "4999b18f-b735-40c5-83f2-8ee300d80760",
+      "name": "PNR Number",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "command": "=echo -n {{ $json.PNR }} | openssl enc -e -a -aes-128-cbc -K 38303830383038303830383038303830 -iv 38303830383038303830383038303830 "
+      },
+      "id": "e53755a4-4603-436c-a69d-0296a388e438",
+      "name": "Payload",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://railways.easemytrip.com/Train/PnrchkStatus",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "pnrNumber",
+              "value": "={{ $json.stdout }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8bf9bdfb-3cdd-47fd-84ae-c8e4563838ab",
+      "name": "Get PNR Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1960,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.first().json.passengerList"
+      },
+      "id": "c37ad20c-a488-43c1-8dc3-748c46f607b9",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        2680,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "aggregateItems",
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "currentStatus"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "64fc78d4-ce8f-490f-839a-fe03c21c4686",
+      "name": "currentStatus",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        2760,
+        180
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "a0e758d9-ae6e-4cb1-9202-762ed9b02ed7",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        320,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "/tmp/pnr.lock",
+        "options": {
+          "append": false
+        }
+      },
+      "id": "fb7c8e39-b6ac-4310-9777-294b2d16be1c",
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        2720,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "options": {}
+      },
+      "id": "767190d0-817d-468a-b232-f0d3f4a4f3ae",
+      "name": "Move Binary Data",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        2480,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/tmp/pnr.lock"
+      },
+      "name": "Read Binary Files",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "position": [
+        800,
+        900
+      ],
+      "typeVersion": 1,
+      "id": "e8ea5258-828d-4584-a5f2-ae2dc5859f10"
+    },
+    {
+      "parameters": {
+        "command": "FILE=/tmp/pnr.lock\nif test -f \"$FILE\"; then\n    echo \"exists\"\nelse\n    echo \"not exists\"\nfi\n"
+      },
+      "id": "ff6c15ea-5935-4d8d-8793-a72799f7d274",
+      "name": "Execute Command",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        800,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\"currentStatus\": \"GNWL 0 \"}\n];"
+      },
+      "id": "fabb23af-222e-4463-9348-06f78cd1ecea",
+      "name": "dummyData",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        960,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "/tmp/pnr.lock",
+        "options": {
+          "append": false
+        }
+      },
+      "id": "fbde34f9-0a72-4c69-9e1a-b03a375fd8b8",
+      "name": "writeDummyData",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "options": {}
+      },
+      "id": "972e536f-c15b-41a9-b0b1-e78eb51dfb4f",
+      "name": "DataConversion",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "bb533b18-f316-4ade-8f33-4bfdd3dc3d98",
+      "name": "readData",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.currentStatus.split(\" \")[1] }}",
+              "value2": "={{ $json.oldStatus.split(\" \")[1] }}"
+            }
+          ]
+        }
+      },
+      "id": "831d5712-a739-49fa-97a2-1daf8740ce88",
+      "name": "IF3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "multiplex",
+        "options": {}
+      },
+      "id": "9e13be81-b51c-4306-95cf-bfc76a12db10",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "id": "6c72864d-6310-4ae3-b9c1-287e3002373d",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        320,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.stdout }}",
+              "value2": "exists"
+            }
+          ]
+        }
+      },
+      "id": "63c0625e-8fc6-4c59-a8e2-724ee0f56d88",
+      "name": "fileCheck",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://docker:8080/v2/send",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"message\": \"Current Waiting - {{ $json.currentStatus}}\", \"number\": \"+919062281806\", \"recipients\": [ \"+919962299913\" ]}  ",
+        "options": {}
+      },
+      "id": "013eb304-8bc2-4090-a47d-586faeb9a2b8",
+      "name": "Notify Signal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        2140,
+        1280
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "538fc69a-acc2-44c4-aa13-de33232bfa4e",
+      "name": "Halt",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2700,
+        1280
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.passengerList }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "e20dd59a-062e-44d5-90c5-21bd58e3cfdf",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        2180,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://flow.sant.sh/webhook/getPNRInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"pnrNumber\": \"{{ $node[\"PNR Number\"].json.PNR }}\"} ",
+        "options": {}
+      },
+      "id": "b740ffa8-93a3-4f68-b6ea-b889109dcfb9",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        2480,
+        420
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "7",
+          "name": "Basic-Auth [Santosh:Password]"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "oldStatus",
+              "value": "={{ $node.Merge.json.currentStatus }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7214c101-866f-42b9-9237-00de036e42d4",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        2260,
+        900
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": [
+        5
+      ]
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-06-24T12:36:33.000Z",
+  "versionId": "d3c7809f-c755-4281-bd0c-631379535f5e"
+}
