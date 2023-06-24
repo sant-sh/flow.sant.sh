@@ -1,0 +1,49 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-01-09T07:23:35.018Z",
+  "id": "2",
+  "name": "name",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "415e24da-ff0a-4ab5-8bf4-4cc5bf9d5c16",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ca63d4da-774c-4d60-88ea-58874c199296",
+        "options": {}
+      },
+      "id": "8b5de896-5b73-4c84-bb2c-8428e9305c06",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        480,
+        300
+      ],
+      "webhookId": "ca63d4da-774c-4d60-88ea-58874c199296"
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-04-02T17:02:38.510Z",
+  "versionId": "776020bd-30f0-477b-b6a3-9c1f13dac8a3"
+}
