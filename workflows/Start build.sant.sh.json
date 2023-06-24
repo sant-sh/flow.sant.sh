@@ -1,0 +1,264 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "IF (Start)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "IF (Stop)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF (Start)": {
+      "main": [
+        [
+          {
+            "node": "SSH2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF (Stop)": {
+      "main": [
+        [
+          {
+            "node": "SSH1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH1": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH2": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "SSH",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-05-22T08:05:21.039Z",
+  "id": "3",
+  "name": "Start build.sant.sh",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "basicAuth",
+        "httpMethod": "POST",
+        "path": "apk_build_server",
+        "options": {
+          "rawBody": true,
+          "responseData": "success"
+        }
+      },
+      "id": "41dd9f37-effe-49d1-b9e4-c9ca7d8f4008",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        420,
+        400
+      ],
+      "webhookId": "82f9d5fa-8c8f-49cb-af6d-5f3ab1aeea99",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "5",
+          "name": "Flow"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.action }}",
+              "value2": "start"
+            }
+          ]
+        }
+      },
+      "id": "b1b5844e-0fa1-4885-b2a6-82776e8c019a",
+      "name": "IF (Start)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        640,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.action }}",
+              "value2": "stop"
+            }
+          ]
+        }
+      },
+      "id": "9b2e4457-1f7e-4882-a372-921da6ccd120",
+      "name": "IF (Stop)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        640,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "command": "/home/santosh/Files/revanced_builder/revanced-builder-linux",
+        "cwd": "/home/santosh/Files/revanced_builder"
+      },
+      "id": "21f14bd4-7280-4f52-b11f-9d521326704e",
+      "name": "SSH",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        80
+      ],
+      "executeOnce": false,
+      "credentials": {
+        "sshPassword": {
+          "id": "3",
+          "name": "SSH Password account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "d3da2d54-37eb-491d-84f5-874d8d8e5d37",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "command": "pkill revanced",
+        "cwd": "/home/santosh/Files/revanced_builder"
+      },
+      "id": "6f0952bb-fd67-4703-8c08-feace5994e4a",
+      "name": "SSH1",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        960,
+        520
+      ],
+      "credentials": {
+        "sshPassword": {
+          "id": "3",
+          "name": "SSH Password account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "pgrep -f revanced"
+      },
+      "id": "deaf613e-8c92-402a-9b26-ddb0612261b0",
+      "name": "SSH2",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        820,
+        100
+      ],
+      "executeOnce": false,
+      "credentials": {
+        "sshPassword": {
+          "id": "3",
+          "name": "SSH Password account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.stdout }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "8c6ab4a3-9996-4d5a-8c17-6ab732375d36",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        100
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-05-22T09:36:34.000Z",
+  "versionId": "666af01d-70c7-47e1-aa21-8e441234af1e"
+}
