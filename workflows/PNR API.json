@@ -1,0 +1,267 @@
+{
+  "active": true,
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "missingPNRNo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "incorrectPNRNo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-06-23T20:41:45.306Z",
+  "id": "8",
+  "name": "PNR API",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://www.confirmtkt.com/pnr-status/{{ $json.body.pnrNumber }}",
+        "options": {}
+      },
+      "id": "3ddc0675-35fd-456b-be06-9825cfbe79e8",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        780,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "data",
+              "value": "={{ ($json.data.match(/data = \\{[^}].*}/)[0]).substring(7) }}"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "id": "32442bc9-86fc-402a-9c5e-2b6bc355e8e9",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        960,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Loop over input items and add a new field\n// called 'myNewField' to the JSON of each one\n\nconst parsedStdout = JSON.parse($input.item.json.data);\n\nreturn {\n  json: {\n    result: parsedStdout\n  }\n};"
+      },
+      "id": "2b83e7c1-8b80-4b01-b04d-9eed54befa26",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \n  \"currentStatus\" :  \"{{ $json.result.PassengerStatus[0].CurrentStatus.replace(\"  \",\" \") }} \"\n}",
+        "options": {}
+      },
+      "id": "f5806e08-74e9-49b6-a3d5-35c30f982dc4",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "basicAuth",
+        "httpMethod": "POST",
+        "path": "getPNRInfo",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "id": "38482d2f-8229-486b-b491-19c42c54a12d",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        140,
+        440
+      ],
+      "webhookId": "3eb1861d-9748-4f88-b13b-9cf96bbf5d31",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "7",
+          "name": "Basic-Auth [Santosh:Password]"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.pnrNumber }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "a87e70bb-a544-47a2-8e63-370c547c0a59",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        360,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.body.pnrNumber.length }}",
+              "operation": "equal",
+              "value2": 10
+            }
+          ],
+          "boolean": [
+            {
+              "value1": "={{ $json.body.pnrNumber.isNumeric() }}",
+              "value2": "={{ true }}"
+            }
+          ]
+        }
+      },
+      "id": "6643c76d-b4d3-4335-a3d9-f37f1128e5b4",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        560,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"errorMsg\" : \"Missing 'pnrNumber' attribute\"}",
+        "options": {}
+      },
+      "id": "518af3f4-c1d3-4619-aaa5-b8dccaf15bfa",
+      "name": "missingPNRNo",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        340,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"errorMsg\" : \"incorrect 'pnrNumber' format\"}",
+        "options": {}
+      },
+      "id": "247c48e3-4fea-432f-9b08-7170855e7a38",
+      "name": "incorrectPNRNo",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        620,
+        660
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-06-24T09:49:20.000Z",
+  "versionId": "52204db6-a037-45ec-9053-5da0340b4644"
+}
