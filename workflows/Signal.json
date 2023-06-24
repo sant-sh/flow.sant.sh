@@ -1,0 +1,70 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Signal Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-05-27T17:52:02.128Z",
+  "id": "6",
+  "name": "Signal",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://ubuntu:8080/v2/send",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"message\": \"Bht badmash h bhai\", \"number\": \"+919062281806\", \"recipients\": [ \"+918521580602\" ]}  ",
+        "options": {}
+      },
+      "id": "7dbcbfb6-e215-4e0b-9e75-64b9fd18fb5c",
+      "name": "Signal Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1780,
+        580
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "3bf1fb67-e63f-4f36-9837-d2ef69fbda94",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        580
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-05-27T18:24:34.000Z",
+  "versionId": "46f26eaa-03fd-409c-ba7d-61b57d2a6f6f"
+}
