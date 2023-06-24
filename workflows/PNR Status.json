@@ -1,0 +1,221 @@
+{
+  "active": true,
+  "connections": {
+    "PNR Number": {
+      "main": [
+        [
+          {
+            "node": "Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Payload": {
+      "main": [
+        [
+          {
+            "node": "Get PNR Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get PNR Status": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "currentStatus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "currentStatus": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "PNR Number",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-05-27T12:49:02.724Z",
+  "id": "4",
+  "name": "PNR Status",
+  "nodes": [
+    {
+      "parameters": {
+        "values": {
+          "number": [
+            {
+              "name": "PNR",
+              "value": 6521287895
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "id": "ec89b115-cf76-4462-af1d-d2ea7c50d5fa",
+      "name": "PNR Number",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "command": "=echo -n {{ $json.PNR }} | openssl enc -e -a -aes-128-cbc -K 38303830383038303830383038303830 -iv 38303830383038303830383038303830 "
+      },
+      "id": "3faedda0-5cb0-42d3-9288-f3fdde600770",
+      "name": "Payload",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://railways.easemytrip.com/Train/PnrchkStatus",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "pnrNumber",
+              "value": "={{ $json.stdout }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e197b75d-ab1f-4bfc-8f4c-54cfea05524d",
+      "name": "Get PNR Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1480,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.first().json.passengerList"
+      },
+      "id": "643c6ea3-fd1d-4003-b8ca-7afa487f1150",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "aggregateItems",
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "currentStatus"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a6ae456f-cde1-4edd-a416-986d281752a0",
+      "name": "currentStatus",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        1920,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 12
+            }
+          ]
+        }
+      },
+      "id": "5160a02f-d6bb-4b9c-a5fc-4ee7c88c3a7e",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        800,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://docker:8080/v2/send",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"message\": \"Current Waiting - {{ $json.currentStatus[0]}}\", \"number\": \"+919062281806\", \"recipients\": [ \"+919962299913\" ]}  ",
+        "options": {}
+      },
+      "id": "4e36ace7-2668-4bbd-bcb7-4a930869ae58",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        2160,
+        420
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": [
+        5
+      ]
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-06-24T12:37:47.000Z",
+  "versionId": "693ccf28-3ec4-434a-9179-468e147c24bd"
+}
