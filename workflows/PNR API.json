@@ -27,7 +27,7 @@
       "main": [
         [
           {
-            "node": "Respond to Webhook",
+            "node": "Respond to Webhook1",
             "type": "main",
             "index": 0
           }
@@ -79,6 +79,12 @@
             "index": 0
           }
         ]
+      ]
+    },
+    "IF2": {
+      "main": [
+        [],
+        []
       ]
     }
   },
@@ -141,7 +147,7 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "={ \n  \"currentStatus\" :  \"{{ $json.result.PassengerStatus[0].CurrentStatus.replace(\"  \",\" \") }} \"\n}",
+        "responseBody": "={ \n  \"currentStatus\" : \"railwayAPIisDown\"\n}",
         "options": {}
       },
       "id": "f5806e08-74e9-49b6-a3d5-35c30f982dc4",
@@ -149,8 +155,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        1260,
-        400
+        1360,
+        940
       ]
     },
     {
@@ -255,6 +261,41 @@
         620,
         660
       ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.result.PassengerStatus }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "3b80cef0-1674-4d28-8ccf-6adfacfd6e2f",
+      "name": "IF2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        940
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \n  \"currentStatus\" :  \"{{ $json.result.PassengerStatus[0].CurrentStatus.replace(\"  \",\" \") }} \"\n}",
+        "options": {}
+      },
+      "id": "e93a5450-1f67-4bba-8575-c22980c39dda",
+      "name": "Respond to Webhook1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        400
+      ]
     }
   ],
   "pinData": {},
@@ -262,6 +303,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-06-24T09:49:20.000Z",
-  "versionId": "52204db6-a037-45ec-9053-5da0340b4644"
+  "updatedAt": "2023-06-27T18:46:28.000Z",
+  "versionId": "4c38e3ac-d191-4612-b541-3a5b32395b5a"
 }
