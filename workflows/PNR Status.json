@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "PNR Number": {
       "main": [
@@ -210,12 +210,12 @@
   "staticData": {
     "node:Schedule Trigger": {
       "recurrencyRules": [
-        17
+        5
       ]
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-06-29T17:00:00.000Z",
-  "versionId": "693ccf28-3ec4-434a-9179-468e147c24bd"
+  "updatedAt": "2023-06-30T05:29:36.000Z",
+  "versionId": "36c6cf71-1950-437b-8cbd-91df3628c6b9"
 }
