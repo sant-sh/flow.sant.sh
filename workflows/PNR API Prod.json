@@ -1,0 +1,308 @@
+{
+  "active": false,
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "missingPNRNo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "incorrectPNRNo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF2": {
+      "main": [
+        [],
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-07-13T16:30:01.330Z",
+  "id": "10",
+  "name": "PNR API Prod",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://www.confirmtkt.com/pnr-status/{{ $json.body.pnrNumber }}",
+        "options": {}
+      },
+      "id": "ab0fa9cc-fbaa-4d2e-a115-3bcf9ce0d53b",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        780,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "data",
+              "value": "={{ ($json.data.match(/data = \\{[^}].*}/)[0]).substring(7) }}"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "id": "afd957ce-1e71-4719-8120-9cc62d9fde2b",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        960,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Loop over input items and add a new field\n// called 'myNewField' to the JSON of each one\n\nconst parsedStdout = JSON.parse($input.item.json.data);\n\nreturn {\n  json: {\n    result: parsedStdout\n  }\n};"
+      },
+      "id": "832184c7-4e7b-456b-9833-7ee40c4dbd96",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \n  \"currentStatus\" : \"railwayAPIisDown\"\n}",
+        "options": {}
+      },
+      "id": "e02be68c-e7e7-4a78-97bc-f278f44ecfcd",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        940
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "basicAuth",
+        "httpMethod": "POST",
+        "path": "getPNRInfo",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "id": "22145cc5-e8e8-460c-9e06-a43c86a4d7d2",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        140,
+        440
+      ],
+      "webhookId": "788ced25-322a-4c3a-8c73-085e0793c65a",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "7",
+          "name": "Basic-Auth [Santosh:Password]"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.pnrNumber }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "d67e6288-2747-45fa-89d9-4efa707c4d8f",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        360,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.body.pnrNumber.length }}",
+              "operation": "equal",
+              "value2": 10
+            }
+          ],
+          "boolean": [
+            {
+              "value1": "={{ $json.body.pnrNumber.isNumeric() }}",
+              "value2": "={{ true }}"
+            }
+          ]
+        }
+      },
+      "id": "1eed0ddb-d197-4689-88f7-26f7e716450d",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        560,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"errorMsg\" : \"Missing 'pnrNumber' attribute\"}",
+        "options": {}
+      },
+      "id": "33036313-d128-4f08-af3a-4081e3516b83",
+      "name": "missingPNRNo",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        340,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"errorMsg\" : \"incorrect 'pnrNumber' format\"}",
+        "options": {}
+      },
+      "id": "3bfc03ef-5038-4e56-91b7-401438540846",
+      "name": "incorrectPNRNo",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        620,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.result.PassengerStatus }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "8b5a5aad-d472-4a0b-99c1-171f935d8e18",
+      "name": "IF2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        940
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \n  \"currentStatus\" :  \"{{ $json.result.PassengerStatus[0].CurrentStatus.replace(\"  \",\" \") }} \"\n}",
+        "options": {}
+      },
+      "id": "e4d56623-6038-4dab-87de-bcda39a71acb",
+      "name": "Respond to Webhook1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        400
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-07-13T16:30:01.330Z",
+  "versionId": "8cef07c1-4e12-4203-ace0-13292cd8040c"
+}
