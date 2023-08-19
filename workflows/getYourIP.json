@@ -8,6 +8,11 @@
             "node": "Send Email",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -30,7 +35,8 @@
     },
     {
       "parameters": {
-        "path": "get_ip",
+        "path": "myIP",
+        "responseMode": "responseNode",
         "options": {}
       },
       "id": "716a30ee-92e7-40ee-b2ac-c5cba64eb73f",
@@ -38,8 +44,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -280,
-        300
+        -340,
+        100
       ],
       "webhookId": "492af7dc-98ad-483c-9287-b2d6bb07c193"
     },
@@ -56,8 +62,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 1,
       "position": [
-        120,
-        300
+        -40,
+        220
       ],
       "credentials": {
         "smtp": {
@@ -65,6 +71,21 @@
           "name": "SendGrid"
         }
       }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"myIP\":\"{{ $json.headers[\"x-forwarded-for\"] }}\"}",
+        "options": {}
+      },
+      "id": "a7aa5dce-ef58-48c1-8eea-88ab86bfc982",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -20
+      ]
     }
   ],
   "pinData": {},
@@ -72,6 +93,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-04-02T17:02:38.509Z",
-  "versionId": "29323dbf-2e62-49af-beb8-05502e163c1f"
+  "updatedAt": "2023-08-19T08:03:30.000Z",
+  "versionId": "abbb78e9-f06f-496c-80fe-3d7d86333cc2"
 }
