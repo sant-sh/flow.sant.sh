@@ -1,0 +1,262 @@
+{
+  "active": true,
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "missingNumber",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "correctFormat",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "+91_Added",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "correctFormat": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "+91_Added": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-08-19T04:52:19.961Z",
+  "id": "11",
+  "name": "Truecaller API",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://search5-noneu.truecaller.com/v2/search",
+        "sendQuery": true,
+        "specifyQuery": "json",
+        "jsonQuery": "={\n        \"q\": \"{{ $json.number }}\",\n        \"countryCode\": \"US\",\n        \"type\": 4,\n        \"locAddr\": \"\",\n        \"placement\": \"SEARCHRESULTS,HISTORY,DETAILS\",\n        \"encoding\": \"json\"\n    }",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{    \"content-type\":\"application/json; charset=UTF-8\",    \"accept-encoding\":\"gzip\",    \"user-agent\":\"Truecaller/11.75.5 (Android;10)\",    \"Authorization\":\"Bearer a1i0j--bV4hgGkx-boR9BFy0ow0leoOkRqIWlY-2_ZnxT-d56Pe95hX0K6Z8tITJ\" }",
+        "options": {}
+      },
+      "id": "c0fb9475-75a0-40f6-b7fb-4f6cb2b64ac7",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1040,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "basicAuth",
+        "httpMethod": "POST",
+        "path": "truecaller",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "id": "07cd45cb-d598-44dc-8c29-465bf4280fca",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        140,
+        440
+      ],
+      "webhookId": "a0ae491d-f6e9-4622-9a08-7edda05d643a",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "7",
+          "name": "Basic-Auth [Santosh:Password]"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.query.number }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "3739cd91-3dc2-4c86-8259-360e9fd4f94d",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        360,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.query.number.slice(0,3) }}",
+              "value2": "+91"
+            }
+          ],
+          "number": [
+            {
+              "value1": "={{ $json.query.number.length }}",
+              "operation": "equal",
+              "value2": 13
+            }
+          ]
+        }
+      },
+      "id": "83c2d9d8-9b4d-4fcd-87d6-188f14d77c6d",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        560,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"errorMsg\" : \"Invalid Data Input\"}",
+        "options": {}
+      },
+      "id": "ae7de9bc-3938-487b-a5d9-d345a00bc5cf",
+      "name": "missingNumber",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        660,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "=[{ \n\"Name\":\"{{ $json.data[0].name }}\",\n\"Number\":\"{{ $json.data[0].phones[0].e164Format }}\",\n\"Carrier\":\"{{ $json.data[0].phones[0].carrier }}\",\n\"City\":\"{{ $json.data[0].addresses[0].city }}\",\n\"Spam\": \"{{ $json.data[0].phones[0].spamType }},{{ $json.data[0].phones[0].spamScore }}\"\n}]",
+        "options": {}
+      },
+      "id": "b085efdd-17b3-4d1d-808e-09e486fed44d",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "number",
+              "value": "={{ $json.query.number }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "81dcbff3-4e8e-45d8-98b4-f887774a25b7",
+      "name": "correctFormat",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        800,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "number",
+              "value": "=+91{{ $json.query.number }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d0eb7f15-9119-4f36-9010-db8995a76159",
+      "name": "+91_Added",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        800,
+        520
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-08-19T07:09:01.000Z",
+  "versionId": "5fad59d5-2eb9-4017-aa0f-df6234438aa3"
+}
