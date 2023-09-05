@@ -1,0 +1,382 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "First-15",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Rename Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Second-15",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Rename Keys1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "First-15": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Second-15": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Keys": {
+      "main": [
+        [
+          {
+            "node": "12h-1d",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "12h-1w",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Keys1": {
+      "main": [
+        [
+          {
+            "node": "12h-1d",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Rename Keys2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Keys2": {
+      "main": [
+        [
+          {
+            "node": "12h-1w",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-09-04T18:39:11.139Z",
+  "id": "12",
+  "name": "Crypto",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "6de153ea-fc56-46a1-a01c-4bb5b97a0878",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        780,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.taapi.io/ema",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "secret",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjRmNjIzNTc0OThkNzVkYTM2NjAwMzBlIiwiaWF0IjoxNjkzODUyNjQxLCJleHAiOjMzMTk4MzE2NjQxfQ.gWmiW5XMzzPqDHT9ArzSM5cVL4yesvTUzLWcfG_z4LQ"
+            },
+            {
+              "name": "exchange",
+              "value": "binance"
+            },
+            {
+              "name": "symbol",
+              "value": "BTC/USDT"
+            },
+            {
+              "name": "interval",
+              "value": "1h"
+            },
+            {
+              "name": "period",
+              "value": "6"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "183054c2-3209-40d2-9ddb-ce695764e67c",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1020,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.taapi.io/ema",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "secret",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjRmNjIzNTc0OThkNzVkYTM2NjAwMzBlIiwiaWF0IjoxNjkzODUyNjQxLCJleHAiOjMzMTk4MzE2NjQxfQ.gWmiW5XMzzPqDHT9ArzSM5cVL4yesvTUzLWcfG_z4LQ"
+            },
+            {
+              "name": "exchange",
+              "value": "binance"
+            },
+            {
+              "name": "symbol",
+              "value": "BTC/USDT"
+            },
+            {
+              "name": "interval",
+              "value": "1h"
+            },
+            {
+              "name": "period",
+              "value": "12"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "09bfe11b-83ec-4f41-b582-1850bdca0f72",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1400,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.taapi.io/ema",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "secret",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjRmNjIzNTc0OThkNzVkYTM2NjAwMzBlIiwiaWF0IjoxNjkzODUyNjQxLCJleHAiOjMzMTk4MzE2NjQxfQ.gWmiW5XMzzPqDHT9ArzSM5cVL4yesvTUzLWcfG_z4LQ"
+            },
+            {
+              "name": "exchange",
+              "value": "binance"
+            },
+            {
+              "name": "symbol",
+              "value": "BTC/USDT"
+            },
+            {
+              "name": "interval",
+              "value": "1h"
+            },
+            {
+              "name": "period",
+              "value": "20"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7cc1678e-d22e-4a1e-b15a-614f2b4e89f2",
+      "name": "HTTP Request3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1760,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 15,
+        "unit": "seconds"
+      },
+      "id": "d6d8a939-692a-4cf2-9ab8-7b9282edbb9a",
+      "name": "First-15",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        440
+      ],
+      "webhookId": "2b6e2e72-96b6-44ed-a549-de70b2c833b6"
+    },
+    {
+      "parameters": {
+        "amount": 15,
+        "unit": "seconds"
+      },
+      "id": "ea9f690d-7e79-4d0c-b991-a9bc2b014202",
+      "name": "Second-15",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        440
+      ],
+      "webhookId": "2b6e2e72-96b6-44ed-a549-de70b2c833b6"
+    },
+    {
+      "parameters": {
+        "keys": {
+          "key": [
+            {
+              "currentKey": "value",
+              "newKey": "candle-6"
+            }
+          ]
+        },
+        "additionalOptions": {}
+      },
+      "id": "b33d580f-59b8-4503-a3c1-da710dd82cf8",
+      "name": "Rename Keys",
+      "type": "n8n-nodes-base.renameKeys",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "keys": {
+          "key": [
+            {
+              "currentKey": "value",
+              "newKey": "candle-12"
+            }
+          ]
+        },
+        "additionalOptions": {}
+      },
+      "id": "05f99cca-a387-4d8e-a422-6f900cc00b5c",
+      "name": "Rename Keys1",
+      "type": "n8n-nodes-base.renameKeys",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "keys": {
+          "key": [
+            {
+              "currentKey": "value",
+              "newKey": "candle-20"
+            }
+          ]
+        },
+        "additionalOptions": {}
+      },
+      "id": "58ebc809-5017-40c3-a9f9-70f531d414a7",
+      "name": "Rename Keys2",
+      "type": "n8n-nodes-base.renameKeys",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "multiplex",
+        "options": {}
+      },
+      "id": "074e6d01-4740-41c5-a9b5-85e21686dd06",
+      "name": "12h-1d",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1460,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "multiplex",
+        "options": {}
+      },
+      "id": "27850742-cbad-4bed-bf58-4351f4979b84",
+      "name": "12h-1w",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1620,
+        860
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-09-04T19:43:53.000Z",
+  "versionId": "7acee266-d720-4e89-b823-e21843d03ce2"
+}
