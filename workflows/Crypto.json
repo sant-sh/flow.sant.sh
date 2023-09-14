@@ -114,6 +114,44 @@
           }
         ]
       ]
+    },
+    "Notify": {
+      "main": [
+        []
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Notify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "c6 - c12": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "c6 - c20": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-04T18:39:11.139Z",
@@ -370,6 +408,53 @@
         1420,
         760
       ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://notify.sant.sh/crypto",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "contentType": "raw",
+        "body": "={{ $json.msg }}",
+        "options": {}
+      },
+      "id": "dd48aa11-d3b7-4021-b801-53d73feb50db",
+      "name": "Notify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1940,
+        840
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "10",
+          "name": "NTFY (notify.sant.sh)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "msg",
+              "value": "This is from n8n via set method"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c453a3b4-305a-4b73-b24e-6a24cf2edaa5",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        840
+      ]
     }
   ],
   "pinData": {},
@@ -377,6 +462,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-09-05T04:31:34.000Z",
-  "versionId": "e30afce8-2929-4f42-8e1b-9680a05cca6c"
+  "updatedAt": "2023-09-14T08:01:43.000Z",
+  "versionId": "ddd2be94-2966-4077-918f-9cbdf0ac0ed1"
 }
