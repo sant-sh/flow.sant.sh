@@ -1,11 +1,11 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "When clicking \"Execute Workflow\"": {
       "main": [
         [
           {
-            "node": "GET (C6)",
+            "node": "Coin",
             "type": "main",
             "index": 0
           }
@@ -115,27 +115,11 @@
         ]
       ]
     },
-    "Notify": {
-      "main": [
-        []
-      ]
-    },
-    "Set": {
-      "main": [
-        [
-          {
-            "node": "Notify",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "c6 - c12": {
       "main": [
         [
           {
-            "node": "Set",
+            "node": "IF",
             "type": "main",
             "index": 0
           }
@@ -146,7 +130,53 @@
       "main": [
         [
           {
-            "node": "Set",
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Notify (6-12)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "Notify (6-20)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Coin": {
+      "main": [
+        [
+          {
+            "node": "GET (C6)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Coin",
             "type": "main",
             "index": 0
           }
@@ -165,7 +195,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        780,
+        600,
         440
       ]
     },
@@ -278,7 +308,7 @@
             },
             {
               "name": "symbol",
-              "value": "BTC/USDT"
+              "value": "XRP/USDT"
             },
             {
               "name": "interval",
@@ -317,7 +347,7 @@
             },
             {
               "name": "symbol",
-              "value": "BTC/USDT"
+              "value": "={{ $json.coin }}"
             },
             {
               "name": "interval",
@@ -356,7 +386,7 @@
             },
             {
               "name": "symbol",
-              "value": "BTC/USDT"
+              "value": "XRP/USDT"
             },
             {
               "name": "interval",
@@ -411,22 +441,99 @@
     },
     {
       "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json[\"candle-6\"] }}",
+              "operation": "equal",
+              "value2": "={{ $json[\"candle-12\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "9c0cdf03-9510-420f-8dfb-279109b2af73",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json[\"candle-6\"] }}",
+              "operation": "equal",
+              "value2": "={{ $json[\"candle-20\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "ed74c2cf-f66f-469b-a762-1848974d5b0e",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        940
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "coin",
+              "value": "XRP/USDT"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9c33f1fe-6519-4fc8-bb04-2022c52bd298",
+      "name": "Coin",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        820,
+        440
+      ]
+    },
+    {
+      "parameters": {
         "method": "POST",
         "url": "https://notify.sant.sh/crypto",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Title",
+              "value": "=Intersection Dectected For {{ $node.Coin.json.coin }}"
+            },
+            {
+              "name": "Tags",
+              "value": "={{ $node.Coin.json.coin }}"
+            }
+          ]
+        },
         "sendBody": true,
         "contentType": "raw",
-        "body": "={{ $json.msg }}",
+        "rawContentType": "=",
+        "body": "=EMA was intersected at period-6 {{ $json[\"candle-6\"] }} and period-12 {{ $json[\"candle-12\"] }}",
         "options": {}
       },
       "id": "dd48aa11-d3b7-4021-b801-53d73feb50db",
-      "name": "Notify",
+      "name": "Notify (6-12)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1940,
-        840
+        1960,
+        740
       ],
       "credentials": {
         "httpBasicAuth": {
@@ -437,31 +544,74 @@
     },
     {
       "parameters": {
-        "values": {
-          "string": [
+        "method": "POST",
+        "url": "https://notify.sant.sh/crypto",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
             {
-              "name": "msg",
-              "value": "This is from n8n via set method"
+              "name": "Title",
+              "value": "=Intersection Dectected For {{ $node.Coin.json.coin }}"
+            },
+            {
+              "name": "Tags",
+              "value": "={{ $node.Coin.json.coin }}"
             }
           ]
         },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "=",
+        "body": "=EMA was intersected at period-6 {{ $json[\"candle-6\"] }} and period-20 {{ $json[\"candle-20\"] }}",
         "options": {}
       },
-      "id": "c453a3b4-305a-4b73-b24e-6a24cf2edaa5",
-      "name": "Set",
-      "type": "n8n-nodes-base.set",
+      "id": "0764f1ad-bd32-47de-a0c4-382b1ab83edc",
+      "name": "Notify (6-20)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1960,
+        920
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "10",
+          "name": "NTFY (notify.sant.sh)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "3a751530-cd9d-437d-a54f-8d1b34cc92f0",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [
-        1700,
-        840
+        600,
+        720
       ]
     }
   ],
   "pinData": {},
   "settings": {},
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2023-09-14T08:01:43.000Z",
-  "versionId": "ddd2be94-2966-4077-918f-9cbdf0ac0ed1"
+  "triggerCount": 1,
+  "updatedAt": "2023-09-16T10:37:28.000Z",
+  "versionId": "664fef71-c42d-4628-b882-1f3fa087ea86"
 }
