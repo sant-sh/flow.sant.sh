@@ -34,44 +34,6 @@
         ]
       ]
     },
-    "candle-6": {
-      "main": [
-        [
-          {
-            "node": "c6 - c12",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "c6 - c20",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "candle-12": {
-      "main": [
-        [
-          {
-            "node": "c6 - c12",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "candle-20": {
-      "main": [
-        [
-          {
-            "node": "c6 - c20",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
     "GET (C12)": {
       "main": [
         [
@@ -137,30 +99,6 @@
         ]
       ]
     },
-    "IF": {
-      "main": [
-        [
-          {
-            "node": "Notify (6-12)",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
-      ]
-    },
-    "IF1": {
-      "main": [
-        [
-          {
-            "node": "Notify (6-20)",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
-      ]
-    },
     "Coin": {
       "main": [
         [
@@ -182,6 +120,66 @@
           }
         ]
       ]
+    },
+    "candle-6": {
+      "main": [
+        [
+          {
+            "node": "c6 - c12",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "c6 - c20",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "candle-12": {
+      "main": [
+        [
+          {
+            "node": "c6 - c12",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "candle-20": {
+      "main": [
+        [
+          {
+            "node": "c6 - c20",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Notify (6-12)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "Notify (6-20)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-04T18:39:11.139Z",
@@ -196,7 +194,7 @@
       "typeVersion": 1,
       "position": [
         600,
-        440
+        560
       ]
     },
     {
@@ -228,69 +226,6 @@
         440
       ],
       "webhookId": "2b6e2e72-96b6-44ed-a549-de70b2c833b6"
-    },
-    {
-      "parameters": {
-        "keys": {
-          "key": [
-            {
-              "currentKey": "value",
-              "newKey": "candle-6"
-            }
-          ]
-        },
-        "additionalOptions": {}
-      },
-      "id": "b33d580f-59b8-4503-a3c1-da710dd82cf8",
-      "name": "candle-6",
-      "type": "n8n-nodes-base.renameKeys",
-      "typeVersion": 1,
-      "position": [
-        1040,
-        680
-      ]
-    },
-    {
-      "parameters": {
-        "keys": {
-          "key": [
-            {
-              "currentKey": "value",
-              "newKey": "candle-12"
-            }
-          ]
-        },
-        "additionalOptions": {}
-      },
-      "id": "05f99cca-a387-4d8e-a422-6f900cc00b5c",
-      "name": "candle-12",
-      "type": "n8n-nodes-base.renameKeys",
-      "typeVersion": 1,
-      "position": [
-        1040,
-        860
-      ]
-    },
-    {
-      "parameters": {
-        "keys": {
-          "key": [
-            {
-              "currentKey": "value",
-              "newKey": "candle-20"
-            }
-          ]
-        },
-        "additionalOptions": {}
-      },
-      "id": "58ebc809-5017-40c3-a9f9-70f531d414a7",
-      "name": "candle-20",
-      "type": "n8n-nodes-base.renameKeys",
-      "typeVersion": 1,
-      "position": [
-        1040,
-        1040
-      ]
     },
     {
       "parameters": {
@@ -420,8 +355,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2,
       "position": [
-        1420,
-        940
+        1400,
+        1040
       ]
     },
     {
@@ -435,8 +370,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2,
       "position": [
-        1420,
-        760
+        1400,
+        840
       ]
     },
     {
@@ -444,9 +379,9 @@
         "conditions": {
           "number": [
             {
-              "value1": "={{ $json[\"candle-6\"] }}",
+              "value1": "={{ $json[\"candle-6\"].replace(/(\\d+\\.\\d{4}).*/, '$1')}} ",
               "operation": "equal",
-              "value2": "={{ $json[\"candle-12\"] }}"
+              "value2": "={{ $json[\"candle-12\"].replace(/(\\d+\\.\\d{4}).*/, '$1')}}"
             }
           ]
         }
@@ -456,8 +391,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1700,
-        760
+        1640,
+        840
       ]
     },
     {
@@ -465,9 +400,9 @@
         "conditions": {
           "number": [
             {
-              "value1": "={{ $json[\"candle-6\"] }}",
+              "value1": "={{  $json[\"candle-6\"].replace(/(\\d+\\.\\d{4}).*/, '$1') }}\n",
               "operation": "equal",
-              "value2": "={{ $json[\"candle-20\"] }}"
+              "value2": "={{  $json[\"candle-20\"].replace(/(\\d+\\.\\d{4}).*/, '$1') }}\n"
             }
           ]
         }
@@ -477,8 +412,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1700,
-        940
+        1660,
+        1040
       ]
     },
     {
@@ -532,8 +467,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1960,
-        740
+        1900,
+        820
       ],
       "credentials": {
         "httpBasicAuth": {
@@ -572,8 +507,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1960,
-        920
+        1900,
+        1020
       ],
       "credentials": {
         "httpBasicAuth": {
@@ -599,7 +534,70 @@
       "typeVersion": 1,
       "position": [
         600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "candle-6",
+              "value": "={{ $json.value.toString() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "70e69512-2472-424d-876b-8cf66ed6899c",
+      "name": "candle-6",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1040,
         720
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "candle-12",
+              "value": "={{ $json.value.toString() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a8f23f98-ae49-4c64-a27a-4343e7cf21cc",
+      "name": "candle-12",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "candle-20",
+              "value": "={{ $json.value.toString() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7b040c7a-c179-472f-b8a6-abc545642578",
+      "name": "candle-20",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        1120
       ]
     }
   ],
@@ -612,6 +610,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-09-16T10:37:28.000Z",
-  "versionId": "664fef71-c42d-4628-b882-1f3fa087ea86"
+  "updatedAt": "2023-09-17T06:58:05.000Z",
+  "versionId": "3cc3fe7b-fb03-4d0d-8572-a2baced5d75c"
 }
