@@ -448,7 +448,7 @@
           "parameters": [
             {
               "name": "Title",
-              "value": "=Intersection Dectected For {{ $node.Coin.json.coin }}"
+              "value": "={{ $node.Coin.json.coin }} - [6-12]"
             },
             {
               "name": "Tags",
@@ -463,7 +463,7 @@
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "=",
-        "body": "=EMA was intersected at period-6 {{ $json[\"candle-6\"] }} and period-12 {{ $json[\"candle-12\"] }}",
+        "body": "=P6 - {{ $json[\"candle-6\"] }} , P12 - {{ $json[\"candle-12\"] }}",
         "options": {}
       },
       "id": "dd48aa11-d3b7-4021-b801-53d73feb50db",
@@ -492,7 +492,7 @@
           "parameters": [
             {
               "name": "Title",
-              "value": "=Intersection Dectected For {{ $node.Coin.json.coin }}"
+              "value": "={{ $node.Coin.json.coin }} - [6-20]"
             },
             {
               "name": "Tags",
@@ -507,7 +507,7 @@
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "=",
-        "body": "=EMA was intersected at period-6 {{ $json[\"candle-6\"] }} and period-20 {{ $json[\"candle-20\"] }}",
+        "body": "=P6 - {{ $json[\"candle-6\"] }}, P20 {{ $json[\"candle-20\"] }}",
         "options": {}
       },
       "id": "0764f1ad-bd32-47de-a0c4-382b1ab83edc",
@@ -618,6 +618,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-09-17T16:06:18.000Z",
-  "versionId": "0c649121-3f14-4ed4-9bc6-2efba24b16cc"
+  "updatedAt": "2023-09-18T11:09:00.000Z",
+  "versionId": "6173ee7e-314d-4dd7-aefa-2d11a9099add"
 }
