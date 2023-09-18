@@ -1,0 +1,677 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Coin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "First-15": {
+      "main": [
+        [
+          {
+            "node": "GET (C6)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Second-15": {
+      "main": [
+        [
+          {
+            "node": "GET (C20)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET (C12)": {
+      "main": [
+        [
+          {
+            "node": "Second-15",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "candle-12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET (C6)": {
+      "main": [
+        [
+          {
+            "node": "candle-6",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "IF2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET (C20)": {
+      "main": [
+        [
+          {
+            "node": "candle-20",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "c6 - c12": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "c6 - c20": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Coin": {
+      "main": [
+        [
+          {
+            "node": "GET (C6)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "candle-6": {
+      "main": [
+        [
+          {
+            "node": "c6 - c12",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "c6 - c20",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "candle-12": {
+      "main": [
+        [
+          {
+            "node": "c6 - c12",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "candle-20": {
+      "main": [
+        [
+          {
+            "node": "c6 - c20",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Notify (6-12)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "Notify (6-20)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Microsoft Excel": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF2": {
+      "main": [
+        [
+          {
+            "node": "First-15",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GET (C12)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-09-17T14:21:01.409Z",
+  "id": "13",
+  "name": "Crypto (WIP)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "974b442c-cec7-4bbf-9515-2bb60f0d965c",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        360,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "f53aa051-6963-4e58-b457-36d3f19b343d",
+      "name": "First-15",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        660,
+        820
+      ],
+      "webhookId": "3374f2de-ae1e-45a5-8c88-d8e3f960fce0"
+    },
+    {
+      "parameters": {
+        "amount": 15,
+        "unit": "seconds"
+      },
+      "id": "ee10d313-91fe-4fb0-a805-4b0de4506641",
+      "name": "Second-15",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        540
+      ],
+      "webhookId": "9518d5a4-a256-4f6e-94e4-ac1fabbdbb27"
+    },
+    {
+      "parameters": {
+        "url": "https://api.taapi.io/ema",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "secret",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjRmNjIzNTc0OThkNzVkYTM2NjAwMzBlIiwiaWF0IjoxNjkzODUyNjQxLCJleHAiOjMzMTk4MzE2NjQxfQ.gWmiW5XMzzPqDHT9ArzSM5cVL4yesvTUzLWcfG_z4LQ"
+            },
+            {
+              "name": "exchange",
+              "value": "binance"
+            },
+            {
+              "name": "symbol",
+              "value": "XRP/USDT"
+            },
+            {
+              "name": "interval",
+              "value": "1h"
+            },
+            {
+              "name": "period",
+              "value": "12"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "de9b26e2-38bd-4e25-b87f-f26233e84efb",
+      "name": "GET (C12)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1480,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.taapi.io/ema",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "secret",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjRmNjIzNTc0OThkNzVkYTM2NjAwMzBlIiwiaWF0IjoxNjkzODUyNjQxLCJleHAiOjMzMTk4MzE2NjQxfQ.gWmiW5XMzzPqDHT9ArzSM5cVL4yesvTUzLWcfG_z4LQ"
+            },
+            {
+              "name": "exchange",
+              "value": "binance"
+            },
+            {
+              "name": "symbol",
+              "value": "={{ $json.coin }}"
+            },
+            {
+              "name": "interval",
+              "value": "1h"
+            },
+            {
+              "name": "period",
+              "value": "6"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "8ddeab4c-43ed-4869-9608-4145da1c9d19",
+      "name": "GET (C6)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        800,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.taapi.io/ema",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "secret",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjRmNjIzNTc0OThkNzVkYTM2NjAwMzBlIiwiaWF0IjoxNjkzODUyNjQxLCJleHAiOjMzMTk4MzE2NjQxfQ.gWmiW5XMzzPqDHT9ArzSM5cVL4yesvTUzLWcfG_z4LQ"
+            },
+            {
+              "name": "exchange",
+              "value": "binance"
+            },
+            {
+              "name": "symbol",
+              "value": "XRP/USDT"
+            },
+            {
+              "name": "interval",
+              "value": "1h"
+            },
+            {
+              "name": "period",
+              "value": "20"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fce5fae1-0308-43b6-bf98-64c00d538014",
+      "name": "GET (C20)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1960,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "multiplex",
+        "options": {}
+      },
+      "id": "17a9dd68-e8e5-4568-95fe-f7c2deefa95a",
+      "name": "c6 - c20",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "multiplex",
+        "options": {}
+      },
+      "id": "fb98ed67-6d4b-4f4e-896a-31be5819341f",
+      "name": "c6 - c12",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json[\"candle-6\"].replace(/(\\d+\\.\\d{4}).*/, '$1')}} ",
+              "operation": "equal",
+              "value2": "={{ $json[\"candle-12\"].replace(/(\\d+\\.\\d{4}).*/, '$1')}}"
+            }
+          ]
+        }
+      },
+      "id": "244d8c35-e251-4286-838e-8e75237ae5ef",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{  $json[\"candle-6\"].replace(/(\\d+\\.\\d{4}).*/, '$1') }}\n",
+              "operation": "equal",
+              "value2": "={{  $json[\"candle-20\"].replace(/(\\d+\\.\\d{4}).*/, '$1') }}\n"
+            }
+          ]
+        }
+      },
+      "id": "7a449e36-2ffb-4466-9185-d750a649e6d2",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1660,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "coin",
+              "value": "XRP/USDT"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "75859724-1136-4e30-a4c2-bfc71524c139",
+      "name": "Coin",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        580,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://notify.sant.sh/crypto",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Title",
+              "value": "=Intersection Dectected For {{ $node.Coin.json.coin }}"
+            },
+            {
+              "name": "Tags",
+              "value": "={{ $node.Coin.json.coin }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "=",
+        "body": "=EMA was intersected at period-6 {{ $json[\"candle-6\"] }} and period-12 {{ $json[\"candle-12\"] }}",
+        "options": {}
+      },
+      "id": "368b1ce0-81f3-4446-8d11-1de8136b96c2",
+      "name": "Notify (6-12)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1900,
+        820
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "10",
+          "name": "NTFY (notify.sant.sh)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://notify.sant.sh/crypto",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Title",
+              "value": "=Intersection Dectected For {{ $node.Coin.json.coin }}"
+            },
+            {
+              "name": "Tags",
+              "value": "={{ $node.Coin.json.coin }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "=",
+        "body": "=EMA was intersected at period-6 {{ $json[\"candle-6\"] }} and period-20 {{ $json[\"candle-20\"] }}",
+        "options": {}
+      },
+      "id": "799748e1-3dfe-4581-acf5-275005d8d3f2",
+      "name": "Notify (6-20)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1900,
+        1020
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "10",
+          "name": "NTFY (notify.sant.sh)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "candle-6",
+              "value": "={{ $json.value.toString() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "af799716-57c8-4531-bf3b-98af16c14583",
+      "name": "candle-6",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "candle-12",
+              "value": "={{ $json.value.toString() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "21caeabc-481b-4dac-9afd-5755f7464cf0",
+      "name": "candle-12",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "candle-20",
+              "value": "={{ $json.value.toString() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2321ce7f-a514-4a69-afac-fd727b5db56b",
+      "name": "candle-20",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "getContent",
+        "workbook": "015YVQ7DDDMLCVN7CCUZGLVZYHQSB7C3FI",
+        "worksheet": "{00000000-0001-0000-0000-000000000000}",
+        "range": "A2:B13"
+      },
+      "id": "231a7a76-f4cf-4e30-a8a3-567a200500ca",
+      "name": "Microsoft Excel",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 1,
+      "position": [
+        440,
+        1360
+      ],
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "11",
+          "name": "Azure AD"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "a0836d29-8397-4576-a230-cd1746392853",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [
+        720,
+        1360
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.statusCode }}",
+              "operation": "equal",
+              "value2": 429
+            }
+          ]
+        }
+      },
+      "id": "10d30f43-4882-4c94-83c4-07c5d7c83acf",
+      "name": "IF2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        460
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-09-17T15:59:37.000Z",
+  "versionId": "a17079d1-b6b6-49da-b591-59b3f1b82562"
+}
