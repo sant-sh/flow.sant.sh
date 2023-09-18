@@ -453,6 +453,10 @@
             {
               "name": "Tags",
               "value": "={{ $node.Coin.json.coin }}"
+            },
+            {
+              "name": "Priority",
+              "value": "urgent"
             }
           ]
         },
@@ -493,6 +497,10 @@
             {
               "name": "Tags",
               "value": "={{ $node.Coin.json.coin }}"
+            },
+            {
+              "name": "Priority",
+              "value": "urgent"
             }
           ]
         },
@@ -610,6 +618,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-09-17T06:58:05.000Z",
-  "versionId": "3cc3fe7b-fb03-4d0d-8572-a2baced5d75c"
+  "updatedAt": "2023-09-17T16:06:18.000Z",
+  "versionId": "0c649121-3f14-4ed4-9bc6-2efba24b16cc"
 }
