@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "PNR Number": {
       "main": [
@@ -136,12 +136,12 @@
       "main": [
         [
           {
-            "node": "Notify Signal",
+            "node": "Set",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Set",
+            "node": "Send Email",
             "type": "main",
             "index": 0
           }
@@ -213,13 +213,7 @@
     },
     "Notify Signal": {
       "main": [
-        [
-          {
-            "node": "Halt",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "IF": {
@@ -254,6 +248,17 @@
           }
         ]
       ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Halt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-06-21T08:00:39.716Z",
@@ -266,7 +271,7 @@
           "number": [
             {
               "name": "PNR",
-              "value": 6521287895
+              "value": 4355302043
             }
           ]
         },
@@ -318,40 +323,6 @@
       "position": [
         1960,
         440
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "return $input.first().json.passengerList"
-      },
-      "id": "c37ad20c-a488-43c1-8dc3-748c46f607b9",
-      "name": "Code",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 1,
-      "position": [
-        2680,
-        40
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "aggregateItems",
-        "fieldsToAggregate": {
-          "fieldToAggregate": [
-            {
-              "fieldToAggregate": "currentStatus"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "64fc78d4-ce8f-490f-839a-fe03c21c4686",
-      "name": "currentStatus",
-      "type": "n8n-nodes-base.itemLists",
-      "typeVersion": 2,
-      "position": [
-        2760,
-        180
       ]
     },
     {
@@ -586,7 +557,7 @@
           "string": [
             {
               "value1": "={{ $json.passengerList }}",
-              "operation": "isEmpty"
+              "operation": "isNotEmpty"
             }
           ]
         }
@@ -647,6 +618,28 @@
         2260,
         900
       ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "notify@sant.sh",
+        "toEmail": "flow@sant.sh",
+        "subject": "PNR Status Changed",
+        "options": {}
+      },
+      "id": "28f1f6b9-9a43-4bf8-b9ba-83697b870b07",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        1240
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "1",
+          "name": "SendGrid"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -660,6 +653,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-06-30T05:32:50.000Z",
-  "versionId": "02c2181f-8ecf-4dbd-bd38-b088411d2613"
+  "updatedAt": "2023-10-09T08:11:11.000Z",
+  "versionId": "77b7190a-13b1-4695-9bbb-2d37af78ed05"
 }
