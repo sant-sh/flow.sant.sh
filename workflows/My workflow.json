@@ -1,0 +1,95 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Binary Files": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-10-12T08:28:12.194Z",
+  "id": "14",
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "15b1e265-999a-4228-8e80-8cb9bc49b12d",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        300,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "citicc@mail.sant.sh",
+        "toEmail": "retail.dox.india@citi.com",
+        "subject": "RE:RE: 'Citibank=037-568-028'",
+        "emailFormat": "html",
+        "html": "=Hello Team,\n\nPlease find the attached statement from my bank.\n\nTotal amount which needed to be paid was - Rs. 4,13,839\nI have paid - Rs. 5,13,839\n\nSo I need your help in getting back 1 Lakh to be reversed to my account which is extra (Rs. 5,13,839 - Rs. 4,13,839 = Rs. 1,00,000)\n\n\n\nAccount Details\nName - Santosh Sah\nAccount - 160601504071\nIFSC - ICIC0001606\n\nPlease let me know if there is any other info needed.\n\nThank you,\nSantosh",
+        "options": {
+          "attachments": "=data",
+          "ccEmail": "citi@sant.sh"
+        }
+      },
+      "id": "c9626eb5-9ce1-40ee-b660-46317cbbe047",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        900,
+        440
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "1",
+          "name": "SendGrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fileSelector": "/tmp/OpTransactionHistory10-10-2023.pdf"
+      },
+      "id": "e34ad161-a998-4fbf-9ffd-a41a1778ddd6",
+      "name": "Read Binary Files",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        580,
+        440
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-10-12T08:45:09.000Z",
+  "versionId": "8bf2ccee-b86b-4cc6-880e-ba46d9e28d0d"
+}
