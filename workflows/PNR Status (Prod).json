@@ -211,11 +211,6 @@
         ]
       ]
     },
-    "Notify Signal": {
-      "main": [
-        []
-      ]
-    },
     "IF": {
       "main": [
         [
@@ -624,6 +619,7 @@
         "fromEmail": "notify@sant.sh",
         "toEmail": "flow@sant.sh",
         "subject": "PNR Status Changed",
+        "text": "=Old Status = {{ $node.Merge.json.oldStatus }},\nCurrent Status =  {{ $node.Merge.json.currentStatus }}",
         "options": {}
       },
       "id": "28f1f6b9-9a43-4bf8-b9ba-83697b870b07",
@@ -653,6 +649,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-10-09T08:11:11.000Z",
-  "versionId": "77b7190a-13b1-4695-9bbb-2d37af78ed05"
+  "updatedAt": "2023-10-11T17:56:33.000Z",
+  "versionId": "445129d0-d893-4ae5-aa4f-a27cf9f266df"
 }
