@@ -94,7 +94,7 @@
         "jsonQuery": "={\n        \"q\": \"{{ $json.number }}\",\n        \"countryCode\": \"US\",\n        \"type\": 4,\n        \"locAddr\": \"\",\n        \"placement\": \"SEARCHRESULTS,HISTORY,DETAILS\",\n        \"encoding\": \"json\"\n    }",
         "sendHeaders": true,
         "specifyHeaders": "json",
-        "jsonHeaders": "{    \"content-type\":\"application/json; charset=UTF-8\",    \"accept-encoding\":\"gzip\",    \"user-agent\":\"Truecaller/11.75.5 (Android;10)\",    \"Authorization\":\"Bearer a1i0D--iTuYeNkRkFK1beX7EldFFGjWKGK8hjOlSJr75aqcCR2H--5btu7-4BfLk\" }",
+        "jsonHeaders": "{    \"content-type\":\"application/json; charset=UTF-8\",    \"accept-encoding\":\"gzip\",    \"user-agent\":\"Truecaller/11.75.5 (Android;10)\",    \"Authorization\":\"Bearer a1i0N--iV99QlVNFD32Led-m7SZ-mkzNBKO0jjyMuW8hIhg94GkLSOODb7-9A5RI\" }",
         "options": {}
       },
       "id": "c0fb9475-75a0-40f6-b7fb-4f6cb2b64ac7",
@@ -257,6 +257,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-10-12T11:12:52.000Z",
-  "versionId": "85086973-216b-4b0b-a2ac-ea2ea6c5422d"
+  "updatedAt": "2023-10-13T10:19:11.000Z",
+  "versionId": "7e2a7a0d-e7d2-41bd-8423-7a08e6de4242"
 }
