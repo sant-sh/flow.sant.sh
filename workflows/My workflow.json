@@ -43,8 +43,8 @@
       "parameters": {
         "fromEmail": "citicc@mail.sant.sh",
         "toEmail": "retail.dox.india@citi.com",
-        "subject": "Re: 'Citibank=037-575-651'",
-        "text": "=Hi Team,\n\nPlease find the requested info as below along the my attached statement from bank.\n\n1.    Reason for excess payment\nReply - As payment was huge (4+ Lakh) and I have paid in multiple ways so by mistake I have paid extra 1 Lakh.\n\n2.    Mode of payment\nReply - Through Paytm as well as Cred\n\n3.    Account number\nReply - 60601504071\n\n4.    Account name\nReply - Santosh Sah \n\n5.    Bank Name\nReply - ICICI Bank\n\n6.    Branch and location\nReply - Salkia, Howrah\n\n7.    Account Type: (Savings / Current)\nReply - Savings\n\n8.    IFSC code\nReply - ICIC0001606\n\n\n- Kindly confirm if the payment was initiated as a direct transfer from a bank account or any application such as Cred app/PhonePe, etc.\nReply - It was done from Paytm App (113839.00) and also through Cred (100000.00), So i need this extra 1 Lakh to my account.\n\n-Valid debit proof (An account statement with entry of the debit details and the source account number Via PDF)\nReply - Kindly check the attachement in this mail.\n\nI need the excess money to my ICICI bank as my mistake I have paid extra amount. So I give my consent for getting/reversing the 1 lakh (which is extra) back to my account.\n\nI would like to request you to kindly process this request as soon possible.\n\nThanks,\nSantosh\n\n\n_____________________________________________________________\n\nHi Mr. Shah,  \n \nThis is with reference to your email dated October 12, 2023. \n \nWe understand that you wish to have the credit balance refund on your card account and want us to assist on the same.\n \nWe would like to inform you that in-order to transfer the excess balance, we require details of the source account from which we have received the latest payment on the card.\nRequest you to share the following source account details at the earliest or latest before 5 working days of the next bill cycle.\n1.    Reason for excess payment\n2.    Mode of payment\n3.    Account number\n4.    Account name\n5.    Bank Name\n6.    Branch and location\n7.    Account Type: (Savings / Current)\n8.    IFSC code\n- Kindly confirm if the payment was initiated as a direct transfer from a bank account or any application such as Cred app/PhonePe, etc.\n-Valid debit proof (An account statement with entry of the debit details and the source account number Via PDF)\nUpon receipt of the required information, I assure that we will refund the available excess credit to the source account (bank account or the application) from which we have received the payment.\nAlso, we request you to share explicit consent for us to transfer excess balance to your source account.",
+        "subject": "Re: 'Citibank=037-581-146'",
+        "text": "=Hi Team,\n\nPlease find the requested statement in the attachement.\n\nPassword for the PDF is the account number - 160601504071\n\nThank you,\nSantosh",
         "options": {
           "attachments": "=data",
           "ccEmail": "citicc@mail.sant.sh"
@@ -67,7 +67,7 @@
     },
     {
       "parameters": {
-        "fileSelector": "/tmp/OpTransactionHistory10-10-2023.pdf"
+        "fileSelector": "/tmp/Statement_OCT2023_172728541.pdf"
       },
       "id": "e34ad161-a998-4fbf-9ffd-a41a1778ddd6",
       "name": "Read Binary Files",
@@ -84,6 +84,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-13T18:31:45.000Z",
-  "versionId": "8b06e6d4-d1ee-4571-a10c-0cda777827bc"
+  "updatedAt": "2023-10-16T09:19:39.000Z",
+  "versionId": "8b3e7cd8-8eaa-4668-bb50-9aef8e20f6d0"
 }
