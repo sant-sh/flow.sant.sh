@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "PNR Number": {
       "main": [
@@ -450,8 +450,7 @@
         "rule": {
           "interval": [
             {
-              "field": "hours",
-              "hoursInterval": 5
+              "triggerAtHour": 6
             }
           ]
         }
@@ -589,7 +588,7 @@
         "subject": "PNR Status Changed (Bihar)",
         "text": "=Old Status = {{ $node.Merge.json.oldStatus }},\nCurrent Status =  {{ $node.Merge.json.currentStatus }}",
         "options": {
-          "ccEmail": "bihar-pnr@mail.sant.sh"
+          "ccEmail": "notify@sant.sh"
         }
       },
       "id": "005b7739-00e2-4ebc-9488-941ff8b82aae",
@@ -619,6 +618,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-10-14T17:36:19.000Z",
-  "versionId": "5f6915e8-ea25-45af-8a2a-fe58a0b1dbb8"
+  "updatedAt": "2023-10-17T16:12:41.000Z",
+  "versionId": "0d5dff1c-03de-4ade-9563-856323f75e10"
 }
