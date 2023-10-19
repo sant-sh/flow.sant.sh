@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "HTTP Request": {
       "main": [
@@ -82,8 +82,9 @@
       ]
     }
   },
-  "createdAt": "2023-06-23T20:41:45.306Z",
-  "id": "8",
+  "createdAt": "2023-10-19T17:49:49.967Z",
+  "id": "jIXDMn8Nh2jfIc5V",
+  "meta": null,
   "name": "PNR API",
   "nodes": [
     {
@@ -91,13 +92,13 @@
         "url": "=https://www.confirmtkt.com/pnr-status/{{ $json.body.pnrNumber }}",
         "options": {}
       },
-      "id": "3ddc0675-35fd-456b-be06-9825cfbe79e8",
+      "id": "61b28fc8-e061-42b2-8580-49290e735043",
       "name": "HTTP Request",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        780,
-        400
+        800,
+        220
       ]
     },
     {
@@ -115,13 +116,13 @@
           "dotNotation": true
         }
       },
-      "id": "32442bc9-86fc-402a-9c5e-2b6bc355e8e9",
+      "id": "fe8ac7df-3ff4-433e-bf98-dc58a41fb9ce",
       "name": "Set",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        960,
-        400
+        980,
+        220
       ]
     },
     {
@@ -129,13 +130,13 @@
         "mode": "runOnceForEachItem",
         "jsCode": "// Loop over input items and add a new field\n// called 'myNewField' to the JSON of each one\n\nconst parsedStdout = JSON.parse($input.item.json.data);\n\nreturn {\n  json: {\n    result: parsedStdout\n  }\n};"
       },
-      "id": "2b83e7c1-8b80-4b01-b04d-9eed54befa26",
+      "id": "e78f5f8f-be79-4894-be39-f92933b3b025",
       "name": "Code",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        1120,
-        400
+        1140,
+        220
       ]
     },
     {
@@ -144,13 +145,13 @@
         "responseBody": "={ \n  \"currentStatus\" : \"railwayAPIisDown\"\n}",
         "options": {}
       },
-      "id": "f5806e08-74e9-49b6-a3d5-35c30f982dc4",
+      "id": "9a26ef46-3870-41d7-ad84-7ef70142ed9e",
       "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        1360,
-        940
+        1380,
+        760
       ]
     },
     {
@@ -163,13 +164,13 @@
           "rawBody": false
         }
       },
-      "id": "38482d2f-8229-486b-b491-19c42c54a12d",
+      "id": "ac3d1d7b-1736-48f4-ad61-1f2434c1dea7",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        140,
-        440
+        160,
+        260
       ],
       "webhookId": "3eb1861d-9748-4f88-b13b-9cf96bbf5d31",
       "credentials": {
@@ -190,13 +191,13 @@
           ]
         }
       },
-      "id": "a87e70bb-a544-47a2-8e63-370c547c0a59",
+      "id": "bf55da5b-7ce0-45c1-be9c-2f399f136d09",
       "name": "IF",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        360,
-        440
+        380,
+        260
       ]
     },
     {
@@ -217,13 +218,13 @@
           ]
         }
       },
-      "id": "6643c76d-b4d3-4335-a3d9-f37f1128e5b4",
+      "id": "643beb07-7383-4517-9059-a9b23e4ff4c7",
       "name": "IF1",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        560,
-        420
+        580,
+        240
       ]
     },
     {
@@ -232,13 +233,13 @@
         "responseBody": "{ \"errorMsg\" : \"Missing 'pnrNumber' attribute\"}",
         "options": {}
       },
-      "id": "518af3f4-c1d3-4619-aaa5-b8dccaf15bfa",
+      "id": "b0a78e71-f33c-488f-9e57-3b0e1650648d",
       "name": "missingPNRNo",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        340,
-        660
+        360,
+        480
       ]
     },
     {
@@ -247,13 +248,13 @@
         "responseBody": "{ \"errorMsg\" : \"incorrect 'pnrNumber' format\"}",
         "options": {}
       },
-      "id": "247c48e3-4fea-432f-9b08-7170855e7a38",
+      "id": "70e226dd-23c4-48cf-9c70-2aa1a50b8755",
       "name": "incorrectPNRNo",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        620,
-        660
+        640,
+        480
       ]
     },
     {
@@ -267,13 +268,13 @@
           ]
         }
       },
-      "id": "3b80cef0-1674-4d28-8ccf-6adfacfd6e2f",
+      "id": "e8bd1047-a154-4b46-a8fd-d5761a90d066",
       "name": "IF2",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1140,
-        940
+        1160,
+        760
       ]
     },
     {
@@ -282,21 +283,23 @@
         "responseBody": "={ \n  \"currentStatus\" :  \"{{ $json.result.PassengerStatus[0].CurrentStatus.replace(\"  \",\" \") }} \"\n}",
         "options": {}
       },
-      "id": "e93a5450-1f67-4bba-8575-c22980c39dda",
+      "id": "1f597ce4-fd88-4727-a1b2-8d7be9f5cf09",
       "name": "Respond to Webhook1",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        1340,
-        400
+        1360,
+        220
       ]
     }
   ],
   "pinData": {},
-  "settings": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
   "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2023-10-14T17:27:09.000Z",
-  "versionId": "2a77b254-9a9f-4daa-a3ea-838a241c79e3"
+  "triggerCount": 0,
+  "updatedAt": "2023-10-19T17:49:49.967Z",
+  "versionId": "ea428738-743a-44ed-a054-7ec7a9eca1c4"
 }
