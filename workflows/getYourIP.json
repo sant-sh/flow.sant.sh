@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Webhook": {
       "main": [
@@ -18,19 +18,20 @@
       ]
     }
   },
-  "createdAt": "2022-10-20T17:31:48.570Z",
-  "id": "1",
+  "createdAt": "2023-10-19T17:54:57.090Z",
+  "id": "cwIBHAwKzxymr7mO",
+  "meta": null,
   "name": "getYourIP",
   "nodes": [
     {
       "parameters": {},
-      "id": "304e10ea-1d63-475e-a19a-49d850675218",
+      "id": "97fa8512-ca16-44ec-8880-386f292423b7",
       "name": "Start",
       "type": "n8n-nodes-base.start",
       "typeVersion": 1,
       "position": [
-        -660,
-        80
+        320,
+        320
       ]
     },
     {
@@ -39,13 +40,13 @@
         "responseMode": "responseNode",
         "options": {}
       },
-      "id": "716a30ee-92e7-40ee-b2ac-c5cba64eb73f",
+      "id": "05aff2d2-feee-46a5-a0f7-5a4e0ed7735d",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -340,
-        100
+        640,
+        340
       ],
       "webhookId": "492af7dc-98ad-483c-9287-b2d6bb07c193"
     },
@@ -57,13 +58,13 @@
         "html": "=Current IP - {{$json[\"headers\"][\"x-forwarded-for\"]}}",
         "options": {}
       },
-      "id": "bf1b29bb-d8c5-431d-97ba-0112fd5a5d8d",
+      "id": "669c4530-ff3a-4134-a3c0-b670a10de3a1",
       "name": "Send Email",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 1,
       "position": [
-        -40,
-        220
+        940,
+        460
       ],
       "credentials": {
         "smtp": {
@@ -78,21 +79,23 @@
         "responseBody": "={\"myIP\":\"{{ $json.headers[\"x-forwarded-for\"] }}\"}",
         "options": {}
       },
-      "id": "a7aa5dce-ef58-48c1-8eea-88ab86bfc982",
+      "id": "120ae374-95c1-47fb-b0e1-97eb979aad6e",
       "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        -40,
-        -20
+        940,
+        220
       ]
     }
   ],
   "pinData": {},
-  "settings": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
   "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2023-08-19T08:03:30.000Z",
-  "versionId": "abbb78e9-f06f-496c-80fe-3d7d86333cc2"
+  "triggerCount": 0,
+  "updatedAt": "2023-10-19T17:55:06.860Z",
+  "versionId": "07ea2782-eaac-4cf7-9c84-9157bd42e2ca"
 }
