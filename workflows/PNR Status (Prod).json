@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "PNR Number": {
       "main": [
@@ -256,8 +256,9 @@
       ]
     }
   },
-  "createdAt": "2023-06-21T08:00:39.716Z",
-  "id": "7",
+  "createdAt": "2023-10-19T17:51:37.557Z",
+  "id": "aL2aW2UkbeSmuW80",
+  "meta": null,
   "name": "PNR Status (Prod)",
   "nodes": [
     {
@@ -274,26 +275,26 @@
           "dotNotation": false
         }
       },
-      "id": "4999b18f-b735-40c5-83f2-8ee300d80760",
+      "id": "0e30d798-d059-46f5-9f69-1f12142a7d57",
       "name": "PNR Number",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        1480,
-        440
+        480,
+        40
       ]
     },
     {
       "parameters": {
         "command": "=echo -n {{ $json.PNR }} | openssl enc -e -a -aes-128-cbc -K 38303830383038303830383038303830 -iv 38303830383038303830383038303830 "
       },
-      "id": "e53755a4-4603-436c-a69d-0296a388e438",
+      "id": "5b5807a1-2bd8-4414-9485-6af7ad562d64",
       "name": "Payload",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        1720,
-        440
+        720,
+        40
       ]
     },
     {
@@ -311,24 +312,24 @@
         },
         "options": {}
       },
-      "id": "8bf9bdfb-3cdd-47fd-84ae-c8e4563838ab",
+      "id": "4aedd4e5-f7db-4132-ac7e-19171aa79a53",
       "name": "Get PNR Status",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1960,
-        440
+        960,
+        40
       ]
     },
     {
       "parameters": {},
-      "id": "a0e758d9-ae6e-4cb1-9202-762ed9b02ed7",
+      "id": "bb730038-6f4f-4d74-b9f8-5a68aa44b0cf",
       "name": "When clicking \"Execute Workflow\"",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        320,
-        780
+        -680,
+        380
       ]
     },
     {
@@ -338,13 +339,13 @@
           "append": false
         }
       },
-      "id": "fb7c8e39-b6ac-4310-9777-294b2d16be1c",
+      "id": "d4c7b83f-9c33-44cf-a5f5-dc5e8000acb4",
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        2720,
-        900
+        1720,
+        500
       ]
     },
     {
@@ -352,13 +353,13 @@
         "mode": "jsonToBinary",
         "options": {}
       },
-      "id": "767190d0-817d-468a-b232-f0d3f4a4f3ae",
+      "id": "7417aa09-0030-453e-a78c-9ca4797bab75",
       "name": "Move Binary Data",
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        2480,
-        900
+        1480,
+        500
       ]
     },
     {
@@ -368,36 +369,36 @@
       "name": "Read Binary Files",
       "type": "n8n-nodes-base.readBinaryFiles",
       "position": [
-        800,
-        900
+        -200,
+        500
       ],
       "typeVersion": 1,
-      "id": "e8ea5258-828d-4584-a5f2-ae2dc5859f10"
+      "id": "f841101f-26f6-41ef-b04b-3f003d870e35"
     },
     {
       "parameters": {
         "command": "FILE=/tmp/pnr.lock\nif test -f \"$FILE\"; then\n    echo \"exists\"\nelse\n    echo \"not exists\"\nfi\n"
       },
-      "id": "ff6c15ea-5935-4d8d-8793-a72799f7d274",
+      "id": "788d5980-7d97-4f9f-9211-44b52093eba8",
       "name": "Execute Command",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        800,
-        460
+        -200,
+        60
       ]
     },
     {
       "parameters": {
         "jsCode": "return [\n  {\"currentStatus\": \"GNWL 0 \"}\n];"
       },
-      "id": "fabb23af-222e-4463-9348-06f78cd1ecea",
+      "id": "a50b4163-4bea-4802-a26f-c1f6d7dbaddd",
       "name": "dummyData",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        960,
-        160
+        -40,
+        -240
       ]
     },
     {
@@ -407,13 +408,13 @@
           "append": false
         }
       },
-      "id": "fbde34f9-0a72-4c69-9e1a-b03a375fd8b8",
+      "id": "0f48d08b-c51e-48de-a573-8b29dadd9e58",
       "name": "writeDummyData",
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        1400,
-        160
+        400,
+        -240
       ]
     },
     {
@@ -421,26 +422,26 @@
         "mode": "jsonToBinary",
         "options": {}
       },
-      "id": "972e536f-c15b-41a9-b0b1-e78eb51dfb4f",
+      "id": "80efa123-7833-42f2-9aaf-57055f5b60bf",
       "name": "DataConversion",
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        1160,
-        160
+        160,
+        -240
       ]
     },
     {
       "parameters": {
         "options": {}
       },
-      "id": "bb533b18-f316-4ade-8f33-4bfdd3dc3d98",
+      "id": "ee37b7d3-28da-4a01-ba76-48e758504641",
       "name": "readData",
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        1260,
-        900
+        260,
+        500
       ]
     },
     {
@@ -454,13 +455,13 @@
           ]
         }
       },
-      "id": "831d5712-a739-49fa-97a2-1daf8740ce88",
+      "id": "5d2467d2-3a4a-42d5-a391-1a78bd8fc236",
       "name": "IF3",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1900,
-        880
+        900,
+        480
       ]
     },
     {
@@ -469,13 +470,13 @@
         "combinationMode": "multiplex",
         "options": {}
       },
-      "id": "9e13be81-b51c-4306-95cf-bfc76a12db10",
+      "id": "f8596f00-176c-4fe8-b7f2-7e4613ecc12c",
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2,
       "position": [
-        1600,
-        880
+        600,
+        480
       ]
     },
     {
@@ -488,13 +489,13 @@
           ]
         }
       },
-      "id": "6c72864d-6310-4ae3-b9c1-287e3002373d",
+      "id": "9f90a331-ceab-408a-9786-011f3a278031",
       "name": "Schedule Trigger",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [
-        320,
-        600
+        -680,
+        200
       ]
     },
     {
@@ -508,13 +509,13 @@
           ]
         }
       },
-      "id": "63c0625e-8fc6-4c59-a8e2-724ee0f56d88",
+      "id": "0899fc7a-8e59-4aab-ae2b-e1199e8a035d",
       "name": "fileCheck",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1120,
-        460
+        120,
+        60
       ]
     },
     {
@@ -526,24 +527,24 @@
         "jsonBody": "={\"message\": \"Current Waiting - {{ $json.currentStatus}}\", \"number\": \"+919062281806\", \"recipients\": [ \"+919962299913\" ]}  ",
         "options": {}
       },
-      "id": "013eb304-8bc2-4090-a47d-586faeb9a2b8",
+      "id": "22551068-aacb-4fda-8d67-130ba1070139",
       "name": "Notify Signal",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        2140,
-        1280
+        1140,
+        880
       ]
     },
     {
       "parameters": {},
-      "id": "538fc69a-acc2-44c4-aa13-de33232bfa4e",
+      "id": "ecf241f0-d646-4fee-b614-1902311e6ce1",
       "name": "Halt",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        2700,
-        1280
+        1700,
+        880
       ]
     },
     {
@@ -557,13 +558,13 @@
           ]
         }
       },
-      "id": "e20dd59a-062e-44d5-90c5-21bd58e3cfdf",
+      "id": "9567666d-be2f-48eb-a0d7-c02c5dee6884",
       "name": "IF",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        2180,
-        440
+        1180,
+        40
       ]
     },
     {
@@ -577,13 +578,13 @@
         "jsonBody": "={\"pnrNumber\": \"{{ $node[\"PNR Number\"].json.PNR }}\"} ",
         "options": {}
       },
-      "id": "b740ffa8-93a3-4f68-b6ea-b889109dcfb9",
+      "id": "a87e10ae-d2b3-4e77-8656-453fb06827c1",
       "name": "HTTP Request",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        2480,
-        420
+        1480,
+        20
       ],
       "credentials": {
         "httpBasicAuth": {
@@ -605,13 +606,13 @@
         },
         "options": {}
       },
-      "id": "7214c101-866f-42b9-9237-00de036e42d4",
+      "id": "bcea9103-e8a0-49db-b820-ba9475bffeb8",
       "name": "Set",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        2260,
-        900
+        1260,
+        500
       ]
     },
     {
@@ -622,13 +623,13 @@
         "text": "=Old Status = {{ $node.Merge.json.oldStatus }},\nCurrent Status =  {{ $node.Merge.json.currentStatus }}",
         "options": {}
       },
-      "id": "28f1f6b9-9a43-4bf8-b9ba-83697b870b07",
+      "id": "f4b93ab9-fd17-424f-8f88-3f54cac8e33f",
       "name": "Send Email",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2,
       "position": [
-        2360,
-        1240
+        1360,
+        840
       ],
       "credentials": {
         "smtp": {
@@ -639,16 +640,12 @@
     }
   ],
   "pinData": {},
-  "settings": {},
-  "staticData": {
-    "node:Schedule Trigger": {
-      "recurrencyRules": [
-        5
-      ]
-    }
+  "settings": {
+    "executionOrder": "v1"
   },
+  "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2023-10-11T17:56:33.000Z",
-  "versionId": "445129d0-d893-4ae5-aa4f-a27cf9f266df"
+  "triggerCount": 0,
+  "updatedAt": "2023-10-19T17:52:28.153Z",
+  "versionId": "dfc77eb4-45c3-487b-90bc-0a2f5f1404de"
 }
