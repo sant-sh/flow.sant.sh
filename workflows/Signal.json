@@ -13,8 +13,9 @@
       ]
     }
   },
-  "createdAt": "2023-05-27T17:52:02.128Z",
-  "id": "6",
+  "createdAt": "2023-10-19T17:53:23.760Z",
+  "id": "nCiuRbeOKRiMmuP7",
+  "meta": null,
   "name": "Signal",
   "nodes": [
     {
@@ -35,36 +36,34 @@
         "jsonBody": "={\"message\": \"Bht badmash h bhai\", \"number\": \"+919062281806\", \"recipients\": [ \"+918521580602\" ]}  ",
         "options": {}
       },
-      "id": "7dbcbfb6-e215-4e0b-9e75-64b9fd18fb5c",
+      "id": "8e148054-c226-4918-96c3-3a42e6ab794e",
       "name": "Signal Message",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1780,
-        580
+        720,
+        320
       ]
     },
     {
       "parameters": {},
-      "id": "3bf1fb67-e63f-4f36-9837-d2ef69fbda94",
+      "id": "05983f06-d247-428c-8a2b-12d36c353a3d",
       "name": "When clicking \"Execute Workflow\"",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        1460,
-        580
+        400,
+        320
       ]
     }
   ],
   "pinData": {},
-  "settings": {},
-  "staticData": {
-    "node:Schedule Trigger": {
-      "recurrencyRules": []
-    }
+  "settings": {
+    "executionOrder": "v1"
   },
+  "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2023-05-27T18:24:34.000Z",
-  "versionId": "46f26eaa-03fd-409c-ba7d-61b57d2a6f6f"
+  "triggerCount": 0,
+  "updatedAt": "2023-10-19T17:53:27.822Z",
+  "versionId": "1a5d461f-b029-431b-9181-c41ed916c8d6"
 }
