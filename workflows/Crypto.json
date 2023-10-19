@@ -182,19 +182,20 @@
       ]
     }
   },
-  "createdAt": "2023-09-04T18:39:11.139Z",
-  "id": "12",
+  "createdAt": "2023-10-19T17:47:02.569Z",
+  "id": "MIvME1O7U9sxS3Il",
+  "meta": null,
   "name": "Crypto",
   "nodes": [
     {
       "parameters": {},
-      "id": "6de153ea-fc56-46a1-a01c-4bb5b97a0878",
+      "id": "4b1f84eb-2aff-4d9a-8a5b-1208fbe87e68",
       "name": "When clicking \"Execute Workflow\"",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        600,
-        560
+        80,
+        340
       ]
     },
     {
@@ -202,13 +203,13 @@
         "amount": 15,
         "unit": "seconds"
       },
-      "id": "d6d8a939-692a-4cf2-9ab8-7b9282edbb9a",
+      "id": "120f8415-4197-4afc-8e09-17c6cbe7428e",
       "name": "First-15",
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1,
       "position": [
-        1220,
-        440
+        700,
+        220
       ],
       "webhookId": "2b6e2e72-96b6-44ed-a549-de70b2c833b6"
     },
@@ -217,13 +218,13 @@
         "amount": 15,
         "unit": "seconds"
       },
-      "id": "ea9f690d-7e79-4d0c-b991-a9bc2b014202",
+      "id": "51b578f9-b818-493d-a8e1-ef66634c329e",
       "name": "Second-15",
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1,
       "position": [
-        1580,
-        440
+        1060,
+        220
       ],
       "webhookId": "2b6e2e72-96b6-44ed-a549-de70b2c833b6"
     },
@@ -257,13 +258,13 @@
         },
         "options": {}
       },
-      "id": "09bfe11b-83ec-4f41-b582-1850bdca0f72",
+      "id": "a9a66f1a-7496-4186-94f5-47164fd9e713",
       "name": "GET (C12)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1400,
-        440
+        880,
+        220
       ]
     },
     {
@@ -296,13 +297,13 @@
         },
         "options": {}
       },
-      "id": "183054c2-3209-40d2-9ddb-ce695764e67c",
+      "id": "23f32a02-593d-431a-80ab-c0a49e7dbc66",
       "name": "GET (C6)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1020,
-        440
+        500,
+        220
       ]
     },
     {
@@ -335,13 +336,13 @@
         },
         "options": {}
       },
-      "id": "7cc1678e-d22e-4a1e-b15a-614f2b4e89f2",
+      "id": "6b15f9ee-7dbe-46ee-ae96-1a8ab9ab0f5c",
       "name": "GET (C20)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1760,
-        440
+        1240,
+        220
       ]
     },
     {
@@ -350,13 +351,13 @@
         "combinationMode": "multiplex",
         "options": {}
       },
-      "id": "27850742-cbad-4bed-bf58-4351f4979b84",
+      "id": "b3dad5ed-9981-4fad-83c7-1f58165a4656",
       "name": "c6 - c20",
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2,
       "position": [
-        1400,
-        1040
+        880,
+        820
       ]
     },
     {
@@ -365,13 +366,13 @@
         "combinationMode": "multiplex",
         "options": {}
       },
-      "id": "074e6d01-4740-41c5-a9b5-85e21686dd06",
+      "id": "5889362c-f049-4d73-896c-22a510dd23f8",
       "name": "c6 - c12",
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2,
       "position": [
-        1400,
-        840
+        880,
+        620
       ]
     },
     {
@@ -386,13 +387,13 @@
           ]
         }
       },
-      "id": "9c0cdf03-9510-420f-8dfb-279109b2af73",
+      "id": "2aa00113-d97d-43e4-b06c-ebfcfa948b73",
       "name": "IF",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1640,
-        840
+        1120,
+        620
       ]
     },
     {
@@ -407,13 +408,13 @@
           ]
         }
       },
-      "id": "ed74c2cf-f66f-469b-a762-1848974d5b0e",
+      "id": "92fc4e1f-1dab-44c4-b913-50c2e981c641",
       "name": "IF1",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1660,
-        1040
+        1140,
+        820
       ]
     },
     {
@@ -428,13 +429,13 @@
         },
         "options": {}
       },
-      "id": "9c33f1fe-6519-4fc8-bb04-2022c52bd298",
+      "id": "25b8dc86-63d6-4ee9-805e-32b568a1943d",
       "name": "Coin",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        820,
-        440
+        300,
+        220
       ]
     },
     {
@@ -466,13 +467,13 @@
         "body": "=P6 - {{ $json[\"candle-6\"] }} , P12 - {{ $json[\"candle-12\"] }}",
         "options": {}
       },
-      "id": "dd48aa11-d3b7-4021-b801-53d73feb50db",
+      "id": "8b018895-bc33-416f-b858-321b5c1e413b",
       "name": "Notify (6-12)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1900,
-        820
+        1380,
+        600
       ],
       "credentials": {
         "httpBasicAuth": {
@@ -510,13 +511,13 @@
         "body": "=P6 - {{ $json[\"candle-6\"] }}, P20 {{ $json[\"candle-20\"] }}",
         "options": {}
       },
-      "id": "0764f1ad-bd32-47de-a0c4-382b1ab83edc",
+      "id": "8c37440e-5027-407e-9231-315d4fd38e08",
       "name": "Notify (6-20)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1900,
-        1020
+        1380,
+        800
       ],
       "credentials": {
         "httpBasicAuth": {
@@ -536,13 +537,13 @@
           ]
         }
       },
-      "id": "3a751530-cd9d-437d-a54f-8d1b34cc92f0",
+      "id": "8331a506-47ce-4cc1-8074-e311280006bc",
       "name": "Schedule Trigger",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [
-        600,
-        300
+        80,
+        80
       ]
     },
     {
@@ -557,13 +558,13 @@
         },
         "options": {}
       },
-      "id": "70e69512-2472-424d-876b-8cf66ed6899c",
+      "id": "a6bda720-a06a-48df-bfa4-9bd83d6c2144",
       "name": "candle-6",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        1040,
-        720
+        520,
+        500
       ]
     },
     {
@@ -578,13 +579,13 @@
         },
         "options": {}
       },
-      "id": "a8f23f98-ae49-4c64-a27a-4343e7cf21cc",
+      "id": "14168bc0-a1ae-414b-a5f4-68e508f28643",
       "name": "candle-12",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        1040,
-        920
+        520,
+        700
       ]
     },
     {
@@ -599,25 +600,23 @@
         },
         "options": {}
       },
-      "id": "7b040c7a-c179-472f-b8a6-abc545642578",
+      "id": "0b20547a-da00-4898-8bbb-2533bffa52fb",
       "name": "candle-20",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        1040,
-        1120
+        520,
+        900
       ]
     }
   ],
   "pinData": {},
-  "settings": {},
-  "staticData": {
-    "node:Schedule Trigger": {
-      "recurrencyRules": []
-    }
+  "settings": {
+    "executionOrder": "v1"
   },
+  "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2023-09-30T17:56:38.000Z",
-  "versionId": "c2146fa5-0698-4b49-846e-5e631be990c1"
+  "triggerCount": 0,
+  "updatedAt": "2023-10-19T17:47:09.991Z",
+  "versionId": "f8dbb817-f7fa-40f0-aed1-de07a6aaaf35"
 }
