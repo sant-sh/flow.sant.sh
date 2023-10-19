@@ -24,19 +24,20 @@
       ]
     }
   },
-  "createdAt": "2023-10-12T08:28:12.194Z",
-  "id": "14",
+  "createdAt": "2023-10-19T17:43:45.495Z",
+  "id": "w48ATtKw3b1imwsV",
+  "meta": null,
   "name": "My workflow",
   "nodes": [
     {
       "parameters": {},
-      "id": "15b1e265-999a-4228-8e80-8cb9bc49b12d",
+      "id": "f6ef8c36-87c7-4025-a037-88ccc1c5941d",
       "name": "When clicking \"Execute Workflow\"",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        300,
-        440
+        340,
+        60
       ]
     },
     {
@@ -50,13 +51,13 @@
           "ccEmail": "citicc@mail.sant.sh"
         }
       },
-      "id": "c9626eb5-9ce1-40ee-b660-46317cbbe047",
+      "id": "261eb6c6-f39c-404f-b631-e6544586b9ed",
       "name": "Send Email",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2,
       "position": [
-        900,
-        440
+        940,
+        60
       ],
       "credentials": {
         "smtp": {
@@ -69,21 +70,23 @@
       "parameters": {
         "fileSelector": "/tmp/Statement_OCT2023_172728541.pdf"
       },
-      "id": "e34ad161-a998-4fbf-9ffd-a41a1778ddd6",
+      "id": "4bb73e44-d9be-46a5-a2bf-2d93bab92899",
       "name": "Read Binary Files",
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        580,
-        440
+        620,
+        60
       ]
     }
   ],
   "pinData": {},
-  "settings": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2023-10-16T09:19:39.000Z",
-  "versionId": "8b3e7cd8-8eaa-4668-bb50-9aef8e20f6d0"
+  "triggerCount": 1,
+  "updatedAt": "2023-10-19T17:48:08.272Z",
+  "versionId": "93785872-3e13-4585-997f-4af903dc6166"
 }
