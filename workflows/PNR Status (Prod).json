@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "PNR Number": {
       "main": [
@@ -588,8 +588,8 @@
       ],
       "credentials": {
         "httpBasicAuth": {
-          "id": "7",
-          "name": "Basic-Auth [Santosh:Password]"
+          "id": "OSTxfqHh6ic9pfoJ",
+          "name": "Santosh:Password"
         }
       }
     },
@@ -643,9 +643,13 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2023-10-19T17:52:28.153Z",
-  "versionId": "dfc77eb4-45c3-487b-90bc-0a2f5f1404de"
+  "triggerCount": 1,
+  "updatedAt": "2023-10-19T18:15:02.275Z",
+  "versionId": "af7659a5-59a5-497a-ae96-3fe207423068"
 }
