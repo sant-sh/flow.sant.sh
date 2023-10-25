@@ -602,7 +602,7 @@
       ],
       "credentials": {
         "smtp": {
-          "id": "1",
+          "id": "OurKgjcgNTPo5E3F",
           "name": "SendGrid"
         }
       }
@@ -619,6 +619,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-10-19T18:16:42.520Z",
-  "versionId": "e5d0529f-0a83-425d-9b77-31d54893d44b"
+  "updatedAt": "2023-10-24T18:28:00.652Z",
+  "versionId": "a4af8944-837c-4adc-af8f-db3336cd28e2"
 }
