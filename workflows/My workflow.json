@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Read Binary Files",
+            "node": "Send Email",
             "type": "main",
             "index": 0
           }
@@ -14,13 +14,7 @@
     },
     "Read Binary Files": {
       "main": [
-        [
-          {
-            "node": "Send Email",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -43,13 +37,10 @@
     {
       "parameters": {
         "fromEmail": "citicc@mail.sant.sh",
-        "toEmail": "retail.dox.india@citi.com",
+        "toEmail": "test@santosh.email",
         "subject": "Re: 'Citibank=037-581-146'",
         "text": "=Hi Team,\n\nPlease find the requested statement in the attachement.\n\nPassword for the PDF is the account number - 160601504071\n\nThank you,\nSantosh",
-        "options": {
-          "attachments": "=data",
-          "ccEmail": "citicc@mail.sant.sh"
-        }
+        "options": {}
       },
       "id": "261eb6c6-f39c-404f-b631-e6544586b9ed",
       "name": "Send Email",
@@ -61,7 +52,7 @@
       ],
       "credentials": {
         "smtp": {
-          "id": "1",
+          "id": "OurKgjcgNTPo5E3F",
           "name": "SendGrid"
         }
       }
@@ -75,8 +66,8 @@
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        620,
-        60
+        600,
+        -200
       ]
     }
   ],
@@ -87,6 +78,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-10-19T17:48:08.272Z",
-  "versionId": "93785872-3e13-4585-997f-4af903dc6166"
+  "updatedAt": "2023-10-24T18:31:58.546Z",
+  "versionId": "25b93403-9e26-4002-b2a3-51e4b5c322ac"
 }
