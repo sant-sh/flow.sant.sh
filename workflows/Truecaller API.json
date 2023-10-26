@@ -92,7 +92,7 @@
         "url": "https://search5-noneu.truecaller.com/v2/search",
         "sendQuery": true,
         "specifyQuery": "json",
-        "jsonQuery": "={\n        \"q\": \"{{ $json.number }}\",\n        \"countryCode\": \"US\",\n        \"type\": 4,\n        \"locAddr\": \"\",\n        \"placement\": \"SEARCHRESULTS,HISTORY,DETAILS\",\n        \"encoding\": \"json\"\n    }",
+        "jsonQuery": "={\n        \"q\": \"{{ $json.number }}\",\n        \"countryCode\": \"IN\",\n        \"type\": 4,\n        \"locAddr\": \"\",\n        \"placement\": \"SEARCHRESULTS,HISTORY,DETAILS\",\n        \"encoding\": \"json\"\n    }",
         "sendHeaders": true,
         "specifyHeaders": "json",
         "jsonHeaders": "{    \"content-type\":\"application/json; charset=UTF-8\",    \"accept-encoding\":\"gzip\",    \"user-agent\":\"Truecaller/11.75.5 (Android;10)\",    \"Authorization\":\"Bearer a1i0N--iV99QlVNFD32Led-m7SZ-mkzNBKO0jjyMuW8hIhg94GkLSOODb7-9A5RI\" }",
@@ -260,6 +260,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-10-21T08:38:16.818Z",
-  "versionId": "68f8790e-5618-48e4-99c6-42dd66c135b2"
+  "updatedAt": "2023-10-26T08:30:58.319Z",
+  "versionId": "bd3f287f-46a4-4614-8cad-5e959d1f6f78"
 }
