@@ -1,0 +1,583 @@
+{
+  "active": false,
+  "connections": {
+    "PNR Number": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Binary Files": {
+      "main": [
+        [
+          {
+            "node": "readData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command": {
+      "main": [
+        [
+          {
+            "node": "fileCheck",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "dummyData": {
+      "main": [
+        [
+          {
+            "node": "DataConversion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "writeDummyData": {
+      "main": [
+        [
+          {
+            "node": "PNR Number",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DataConversion": {
+      "main": [
+        [
+          {
+            "node": "writeDummyData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "readData": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "IF3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF3": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move Binary Data": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "fileCheck": {
+      "main": [
+        [
+          {
+            "node": "PNR Number",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "dummyData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Binary File": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Move Binary Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-11-01T08:14:36.005Z",
+  "id": "Fn6YvI2xyGsw9Mvs",
+  "meta": null,
+  "name": "PNR Status Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "values": {
+          "number": [
+            {
+              "name": "PNR",
+              "value": 6325767194
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "id": "dbdd1803-26ab-410b-93ef-5c13b32513c0",
+      "name": "PNR Number",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        920,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "command": "=echo -n {{ $json.PNR }} | openssl enc -e -a -aes-128-cbc -K 38303830383038303830383038303830 -iv 38303830383038303830383038303830 "
+      },
+      "id": "1213132c-8412-428f-9bf1-08a609fe836c",
+      "name": "Payload",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1660,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://railways.easemytrip.com/Train/PnrchkStatus",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "pnrNumber",
+              "value": "={{ $json.stdout }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d1c0123b-f888-4965-a3ee-43bc0d91e919",
+      "name": "Get PNR Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1880,
+        -320
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ed92beb0-9c09-49a3-b8f7-331d462a2866",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "/tmp/6325767194.lock",
+        "options": {
+          "append": false
+        }
+      },
+      "id": "0ea12a68-3d8c-4cb2-bcbc-48eb0b50739b",
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        2040,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "options": {}
+      },
+      "id": "b12522f6-6ac9-470d-bff3-e2c3dcc6703a",
+      "name": "Move Binary Data",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        1800,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/tmp/6325767194.lock"
+      },
+      "name": "Read Binary Files",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "position": [
+        -40,
+        720
+      ],
+      "typeVersion": 1,
+      "id": "aab37945-64d6-427a-b428-d622c2abea5f"
+    },
+    {
+      "parameters": {
+        "command": "FILE=/tmp/6325767194.lock\nif test -f \"$FILE\"; then\n    echo \"exists\"\nelse\n    echo \"not exists\"\nfi\n"
+      },
+      "id": "70866181-9298-42fd-9602-05965baaaac4",
+      "name": "Execute Command",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\"currentStatus\": \"GNWL 0 \"}\n];"
+      },
+      "id": "21601092-5a70-47f0-80b1-2c163c57ca4a",
+      "name": "dummyData",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        140,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "/tmp/6325767194.lock",
+        "options": {
+          "append": false
+        }
+      },
+      "id": "6407f8c5-8cf9-4f02-96cf-625a6d269ede",
+      "name": "writeDummyData",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        620,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "options": {}
+      },
+      "id": "16f08ffd-9786-4552-bdb6-322b2adfcb83",
+      "name": "DataConversion",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        380,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "cb0284af-1b33-4190-b45d-6310acd45e52",
+      "name": "readData",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        460,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.currentStatus.split(\" \")[1] }}",
+              "value2": "={{ $json.oldStatus.split(\" \")[1] }}"
+            }
+          ]
+        }
+      },
+      "id": "bf26924b-adab-4d5e-ad47-8a21264aafce",
+      "name": "IF3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "multiplex",
+        "options": {}
+      },
+      "id": "0c79653f-0cb1-498a-b821-02c379de7c33",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 6
+            }
+          ]
+        }
+      },
+      "id": "880c85ef-8995-4dd2-9ace-1edc51da58be",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.stdout }}",
+              "value2": "exists"
+            }
+          ]
+        }
+      },
+      "id": "31a245e9-670c-4057-ae4b-a42f94b77c04",
+      "name": "fileCheck",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        360,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://docker:8080/v2/send",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"message\": \"Current Waiting - {{ $json.currentStatus}}\", \"number\": \"+919062281806\", \"recipients\": [ \"+919962299913\" ]}  ",
+        "options": {}
+      },
+      "id": "be64c838-66e9-4ddb-8b31-e6310f86c428",
+      "name": "Notify Signal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        2080,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://flow.sant.sh/webhook/getPNRInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"pnrNumber\": \"{{ $node[\"PNR Number\"].json.PNR }}\"} ",
+        "options": {}
+      },
+      "id": "6edd02e3-45cc-4f7c-997e-21f394c1e839",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1380,
+        20
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "OSTxfqHh6ic9pfoJ",
+          "name": "Santosh:Password"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "oldStatus",
+              "value": "={{ $node.Merge.json.currentStatus }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "46cde34b-2fe7-4163-844f-5b0ed9e43d55",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "notify@sant.sh",
+        "toEmail": "pahal_todu@mail.itsbiswa.me",
+        "subject": "PNR Status Changed (Bihar)",
+        "text": "=Old Status = {{ $node.Merge.json.oldStatus }},\nCurrent Status =  {{ $node.Merge.json.currentStatus }}",
+        "options": {
+          "ccEmail": "notify@sant.sh"
+        }
+      },
+      "id": "e3dd21a5-a56a-4865-a42d-c915cf831ed9",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        1620,
+        1040
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "OurKgjcgNTPo5E3F",
+          "name": "SendGrid"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2023-11-01T08:14:32.867Z",
+      "updatedAt": "2023-11-01T08:14:32.867Z",
+      "id": "oz6Cz3tUleYN2NU0",
+      "name": "PNR"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-11-01T09:51:26.059Z",
+  "versionId": "6fa81cc5-7847-434b-b97b-e99aadf7cbb3"
+}
