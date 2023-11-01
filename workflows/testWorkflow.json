@@ -1,0 +1,53 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Customer Datastore (n8n training)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-11-01T09:51:44.781Z",
+  "id": "OFUASiC186ekqvKS",
+  "meta": null,
+  "name": "testWorkflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "142b74ff-8b4f-44e7-b90c-76d64966ba88",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        520,
+        400
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "c7561de2-0b6e-4669-8a06-122eec9a5581",
+      "name": "Customer Datastore (n8n training)",
+      "type": "n8n-nodes-base.n8nTrainingCustomerDatastore",
+      "typeVersion": 1,
+      "position": [
+        800,
+        400
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-11-01T09:59:55.166Z",
+  "versionId": "73cc108d-8ba0-4473-bfb6-7f5001ebd214"
+}
