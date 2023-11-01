@@ -1,0 +1,136 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Nextcloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nextcloud": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-11-01T08:18:43.580Z",
+  "id": "W3cCDkcoddHiTYFg",
+  "meta": null,
+  "name": "PNR Job",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "2fdfdf97-7ce5-414b-abac-2b91f3d7e285",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "download",
+        "path": "flow.sant.sh/pnr.csv"
+      },
+      "id": "497cba0f-5ce6-4a35-bb19-b4a9fd1a961b",
+      "name": "Nextcloud",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        360
+      ],
+      "credentials": {
+        "nextCloudOAuth2Api": {
+          "id": "5MkYdrPqS6MRFxRX",
+          "name": "NextCloud"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fileFormat": "csv",
+        "options": {}
+      },
+      "id": "d59291af-6e91-49df-be75-7461b8fc672b",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 2,
+      "position": [
+        -300,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "var length = items.length;\nresult = [ { \"json\" : { \"count\": length } } ];\nreturn result;"
+      },
+      "id": "188990b0-a992-419b-af10-ce3510037f59",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -120,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "OFUASiC186ekqvKS"
+      },
+      "id": "718aa9e9-da27-499b-85d8-e918acc49489",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        340,
+        360
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-11-01T10:52:05.910Z",
+  "versionId": "e864f859-72c4-40e1-835e-e2393718d587"
+}
