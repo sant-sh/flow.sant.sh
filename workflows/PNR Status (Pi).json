@@ -247,8 +247,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        740,
-        180
+        920,
+        20
       ]
     },
     {
@@ -260,8 +260,8 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        1020,
-        -40
+        1660,
+        -320
       ]
     },
     {
@@ -284,8 +284,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1320,
-        -160
+        1880,
+        -320
       ]
     },
     {
@@ -295,8 +295,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -420,
-        520
+        -620,
+        560
       ]
     },
     {
@@ -311,8 +311,8 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        1980,
-        640
+        2040,
+        680
       ]
     },
     {
@@ -325,8 +325,8 @@
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        1740,
-        640
+        1800,
+        680
       ]
     },
     {
@@ -336,8 +336,8 @@
       "name": "Read Binary Files",
       "type": "n8n-nodes-base.readBinaryFiles",
       "position": [
-        60,
-        640
+        -40,
+        720
       ],
       "typeVersion": 1,
       "id": "4d467859-d391-4a4d-99e0-8521ef8fc070"
@@ -351,8 +351,8 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        60,
-        200
+        -40,
+        40
       ]
     },
     {
@@ -364,8 +364,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        220,
-        -100
+        140,
+        300
       ]
     },
     {
@@ -380,8 +380,8 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        660,
-        -100
+        620,
+        300
       ]
     },
     {
@@ -394,8 +394,8 @@
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        420,
-        -100
+        380,
+        300
       ]
     },
     {
@@ -407,8 +407,8 @@
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        520,
-        640
+        460,
+        720
       ]
     },
     {
@@ -427,8 +427,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1160,
-        620
+        1260,
+        700
       ]
     },
     {
@@ -442,8 +442,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2,
       "position": [
-        860,
-        620
+        1000,
+        700
       ]
     },
     {
@@ -461,8 +461,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [
-        -420,
-        340
+        -620,
+        220
       ]
     },
     {
@@ -481,8 +481,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        380,
-        200
+        360,
+        40
       ]
     },
     {
@@ -499,8 +499,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1400,
-        1020
+        2080,
+        -320
       ]
     },
     {
@@ -510,28 +510,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        1960,
-        1020
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.passengerList }}",
-              "operation": "isNotEmpty"
-            }
-          ]
-        }
-      },
-      "id": "71bce4b2-e0b3-4037-8d2f-b840a73b68b0",
-      "name": "IF",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        1300,
-        40
+        2200,
+        1040
       ]
     },
     {
@@ -550,8 +530,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        980,
-        180
+        1380,
+        20
       ],
       "credentials": {
         "httpBasicAuth": {
@@ -578,8 +558,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        1520,
-        640
+        1560,
+        680
       ]
     },
     {
@@ -598,7 +578,7 @@
       "typeVersion": 2,
       "position": [
         1620,
-        980
+        1040
       ],
       "credentials": {
         "smtp": {
@@ -619,6 +599,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-10-24T18:28:00.652Z",
-  "versionId": "a4af8944-837c-4adc-af8f-db3336cd28e2"
+  "updatedAt": "2023-11-01T08:11:13.617Z",
+  "versionId": "1fe6af9f-2daa-4f6b-8eb9-a8ef85995d64"
 }
