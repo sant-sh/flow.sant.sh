@@ -1,17 +1,6 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
-    "When clicking \"Execute Workflow\"": {
-      "main": [
-        [
-          {
-            "node": "Nextcloud",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Nextcloud": {
       "main": [
         [
@@ -27,18 +16,18 @@
       "main": [
         [
           {
-            "node": "Code",
+            "node": "Execute Workflow",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Code": {
+    "Webhook": {
       "main": [
         [
           {
-            "node": "Execute Workflow",
+            "node": "Nextcloud",
             "type": "main",
             "index": 0
           }
@@ -52,17 +41,6 @@
   "name": "PNR Job",
   "nodes": [
     {
-      "parameters": {},
-      "id": "2fdfdf97-7ce5-414b-abac-2b91f3d7e285",
-      "name": "When clicking \"Execute Workflow\"",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -660,
-        360
-      ]
-    },
-    {
       "parameters": {
         "authentication": "oAuth2",
         "operation": "download",
@@ -73,7 +51,7 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        -480,
+        -520,
         360
       ],
       "credentials": {
@@ -106,22 +84,37 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -120,
-        360
+        -100,
+        160
       ]
     },
     {
       "parameters": {
-        "workflowId": "OFUASiC186ekqvKS"
+        "workflowId": "ok5IOMiYiQRSPSdZ"
       },
       "id": "718aa9e9-da27-499b-85d8-e918acc49489",
       "name": "Execute Workflow",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        340,
+        120,
         360
       ]
+    },
+    {
+      "parameters": {
+        "path": "0b9580cd-8438-40ca-b9e5-b218c7f10c15",
+        "options": {}
+      },
+      "id": "52a78fcf-1154-40bb-a6b8-3655779d8731",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -760,
+        360
+      ],
+      "webhookId": "0b9580cd-8438-40ca-b9e5-b218c7f10c15"
     }
   ],
   "pinData": {},
@@ -130,7 +123,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2023-11-01T10:52:05.910Z",
-  "versionId": "e864f859-72c4-40e1-835e-e2393718d587"
+  "triggerCount": 1,
+  "updatedAt": "2023-11-04T19:24:47.646Z",
+  "versionId": "1a8baa0d-a385-4d43-bdf5-4fc1d1eacba4"
 }
