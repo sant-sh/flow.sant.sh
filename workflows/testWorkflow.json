@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Customer Datastore (n8n training)",
+            "node": "Item Lists",
             "type": "main",
             "index": 0
           }
@@ -25,18 +25,43 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        520,
+        220,
         400
       ]
     },
     {
-      "parameters": {},
-      "id": "c7561de2-0b6e-4669-8a06-122eec9a5581",
-      "name": "Customer Datastore (n8n training)",
-      "type": "n8n-nodes-base.n8nTrainingCustomerDatastore",
-      "typeVersion": 1,
+      "parameters": {
+        "fromEmail": "flow@sant.sh",
+        "toEmail": "flow@sant.sh",
+        "subject": "trigger",
+        "options": {}
+      },
+      "id": "b2b7b74f-8ac5-4db6-a3df-a47d92dcdf4d",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
       "position": [
-        800,
+        740,
+        400
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "OurKgjcgNTPo5E3F",
+          "name": "SendGrid"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "concatenateItems",
+        "aggregate": "aggregateAllItemData"
+      },
+      "id": "abd73f52-db6a-4a73-a52c-30767ee13940",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [
+        500,
         400
       ]
     }
@@ -48,6 +73,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-01T09:59:55.166Z",
-  "versionId": "73cc108d-8ba0-4473-bfb6-7f5001ebd214"
+  "updatedAt": "2023-11-04T18:50:05.768Z",
+  "versionId": "bf48a7c3-396c-44f0-a65c-b933f401298e"
 }
